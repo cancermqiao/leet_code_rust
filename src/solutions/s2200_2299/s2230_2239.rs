@@ -18,6 +18,6 @@ mod tests {
         let num1 = 12;
         let num2 = 5;
         let res = Solution::sum(num1, num2);
-        assert_eq!(res, 17)
+        assert_eq!(res, 17);
     }
 }

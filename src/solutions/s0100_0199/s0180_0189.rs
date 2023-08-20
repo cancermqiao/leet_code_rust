@@ -38,6 +38,6 @@ mod tests {
         let mut nums = vec![1,2,3,4,5,6,7];
         let k = 3;
         Solution::rotate(&mut nums, k);
-        assert_eq!(nums, vec![5,6,7,1,2,3,4])
+        assert_eq!(nums, vec![5,6,7,1,2,3,4]);
     }
 }

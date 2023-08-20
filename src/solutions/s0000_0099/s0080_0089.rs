@@ -51,7 +51,7 @@ mod tests {
     fn remove_duplicates() {
         let mut nums = vec![1,1,1,2,2,3];
         let res = Solution::remove_duplicates(&mut nums);
-        assert_eq!(&nums[0..res as usize], vec![1,1,2,2,3])
+        assert_eq!(&nums[0..res as usize], vec![1,1,2,2,3]);
     }
 
     // 88. 合并两个有序数组
@@ -60,6 +60,6 @@ mod tests {
         let mut nums1 = vec![1,2,3,0,0,0];
         let mut nums2 = vec![2, 5, 6];
         Solution::merge(&mut nums1, 3, &mut nums2, 3);
-        assert_eq!(nums1, vec![1,2,2,3,5,6])
+        assert_eq!(nums1, vec![1,2,2,3,5,6]);
     }
 }

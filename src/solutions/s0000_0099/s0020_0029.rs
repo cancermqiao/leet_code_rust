@@ -37,7 +37,7 @@ mod tests {
     fn remove_duplicates() {
         let mut nums = vec![1, 1, 2];
         let res = Solution::remove_duplicates(&mut nums);
-        assert_eq!(&nums[0..res as usize], [1, 2])
+        assert_eq!(&nums[0..res as usize], [1, 2]);
     }
 
     // 27. 移除元素
@@ -46,6 +46,6 @@ mod tests {
         let mut nums = vec![3, 2, 2, 3];
         let val = 3;
         let res = Solution::remove_element(&mut nums, val);
-        assert_eq!(&nums[0..res as usize], [2, 2])
+        assert_eq!(&nums[0..res as usize], [2, 2]);
     }
 }

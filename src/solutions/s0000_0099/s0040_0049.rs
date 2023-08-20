@@ -29,6 +29,6 @@ mod tests {
     fn jump() {
         let nums = vec![2,3,1,1,4];
         let step = Solution::jump(nums);
-        assert_eq!(step, 2)
+        assert_eq!(step, 2);
     }
 }
