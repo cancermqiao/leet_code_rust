@@ -1,7 +1,7 @@
 pub struct Solution {}
 
 impl Solution {
-    // 121. 买卖股票的最佳时机
+    /// 121. 买卖股票的最佳时机
     #[allow(dead_code)]
     pub fn max_profit(prices: Vec<i32>) -> i32 {
         let mut profit = 0;
@@ -13,7 +13,7 @@ impl Solution {
         profit
     }
 
-    // 122. 买卖股票的最佳时机 II
+    /// 122. 买卖股票的最佳时机 II
     #[allow(dead_code)]
     pub fn max_profit_v2(prices: Vec<i32>) -> i32 {
         let mut profit = 0;
@@ -27,7 +27,7 @@ impl Solution {
         profit
     }
 
-    // 125. 验证回文串
+    /// 125. 验证回文串
     #[allow(dead_code)]
     pub fn is_palindrome(s: String) -> bool {
         let mut chars = s.chars().filter(|x| x.is_alphanumeric());
@@ -44,7 +44,7 @@ impl Solution {
 mod tests {
     use super::*;
 
-    // 121. 买卖股票的最佳时机
+    /// 121. 买卖股票的最佳时机
     #[test]
     fn max_profit() {
         let prices = vec![7, 1, 5, 3, 6, 4];
@@ -52,7 +52,7 @@ mod tests {
         assert_eq!(profit, 5);
     }
 
-    // 122. 买卖股票的最佳时机 II
+    /// 122. 买卖股票的最佳时机 II
     #[test]
     fn max_profit_v2() {
         let prices = vec![7, 1, 5, 3, 6, 4];
@@ -60,7 +60,7 @@ mod tests {
         assert_eq!(profit, 7);
     }
 
-    // 125. 验证回文串
+    /// 125. 验证回文串
     #[test]
     fn is_palindrome() {
         let s = "A man, a plan, a canal: Panama".to_string();

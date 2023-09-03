@@ -1,7 +1,7 @@
 pub struct Solution {}
 
 impl Solution {
-    // 36. 有效的数独
+    /// 36. 有效的数独
     #[allow(dead_code)]
     pub fn is_valid_sudoku(board: Vec<Vec<char>>) -> bool {
         let mut rows = vec![vec![0; 9]; 9];
@@ -32,7 +32,7 @@ impl Solution {
 mod tests {
     use super::*;
 
-    // 36. 有效的数独
+    /// 36. 有效的数独
     #[test]
     fn is_valid_sudoku() {
         let board = vec![

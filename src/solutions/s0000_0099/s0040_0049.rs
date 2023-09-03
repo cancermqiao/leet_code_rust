@@ -1,7 +1,7 @@
 pub struct Solution {}
 
 impl Solution {
-    // 45. 跳跃游戏 II
+    /// 45. 跳跃游戏 II
     #[allow(dead_code)]
     pub fn jump(nums: Vec<i32>) -> i32 {
         let (mut max_pos, mut step, mut end) = (0, 0, 0);
@@ -24,7 +24,7 @@ impl Solution {
 mod tests {
     use super::*;
 
-    // 45. 跳跃游戏 II
+    /// 45. 跳跃游戏 II
     #[test]
     fn jump() {
         let nums = vec![2,3,1,1,4];

@@ -1,7 +1,7 @@
 pub struct Solution {}
 
 impl Solution {
-    // 2235. 两整数相加
+    /// 2235. 两整数相加
     #[allow(dead_code)]
     pub fn sum(num1: i32, num2: i32) -> i32 {
         num1 + num2
@@ -12,7 +12,7 @@ impl Solution {
 mod tests {
     use super::*;
     
-    // 2235. 两整数相加
+    /// 2235. 两整数相加
     #[test]
     fn sum() {
         let num1 = 12;

@@ -1,7 +1,7 @@
 pub struct Solution {}
 
 impl Solution {
-    // 383. 赎金信
+    /// 383. 赎金信
     #[allow(dead_code)]
     pub fn can_construct(ransom_note: String, magazine: String) -> bool {
         if ransom_note.len() > magazine.len() {
@@ -23,7 +23,7 @@ impl Solution {
 mod tests {
     use super::*;
 
-    // 383. 赎金信
+    /// 383. 赎金信
     #[test]
     fn can_construct() {
         let ransom_note = "a".to_string();

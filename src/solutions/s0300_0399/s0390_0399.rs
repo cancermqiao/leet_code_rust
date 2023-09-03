@@ -1,7 +1,7 @@
 pub struct Solution {}
 
 impl Solution {
-    // 392. 判断子序列
+    /// 392. 判断子序列
     #[allow(dead_code)]
     pub fn is_subsequence(s: String, t: String) -> bool {
         let mut s_chars = s.chars();
@@ -25,7 +25,7 @@ impl Solution {
 mod tests {
     use super::*;
 
-    // 392. 判断子序列
+    /// 392. 判断子序列
     #[test]
     fn is_subsequence() {
         let (s, t) = ("abc".to_string(), "ahbgdc".to_string());

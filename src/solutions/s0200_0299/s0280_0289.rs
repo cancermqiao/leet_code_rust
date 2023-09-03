@@ -1,7 +1,7 @@
 pub struct Solution {}
 
 impl Solution {
-    // 283. 移动零
+    /// 283. 移动零
     #[allow(dead_code)]
     pub fn move_zeroes(nums: &mut Vec<i32>) {
         let mut zero_flag = 0_usize;
@@ -19,7 +19,7 @@ impl Solution {
 mod tests {
     use super::*;
     
-    // 283. 移动零
+    /// 283. 移动零
     #[test]
     fn move_zeroes() {
         let mut nums = vec![0,1,0,3,12];

@@ -1,7 +1,7 @@
 pub struct Solution {}
 
 impl Solution {
-    // 80. 删除有序数组中的重复项 II
+    /// 80. 删除有序数组中的重复项 II
     #[allow(dead_code)]
     pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
         let k = 2;
@@ -19,7 +19,7 @@ impl Solution {
         p as i32
     }
 
-    // 88. 合并两个有序数组
+    /// 88. 合并两个有序数组
     #[allow(dead_code)]
     pub fn merge(nums1: &mut Vec<i32>, m: i32, nums2: &mut Vec<i32>, n: i32) {
         let mut i = m - 1;
@@ -46,7 +46,7 @@ impl Solution {
 mod tests {
     use super::*;
 
-    // 80. 删除有序数组中的重复项 II
+    /// 80. 删除有序数组中的重复项 II
     #[test]
     fn remove_duplicates() {
         let mut nums = vec![1,1,1,2,2,3];
@@ -54,7 +54,7 @@ mod tests {
         assert_eq!(&nums[0..res as usize], vec![1,1,2,2,3]);
     }
 
-    // 88. 合并两个有序数组
+    /// 88. 合并两个有序数组
     #[test]
     fn merge() {
         let mut nums1 = vec![1,2,3,0,0,0];

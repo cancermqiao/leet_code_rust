@@ -1,7 +1,7 @@
 pub struct Solution {}
 
 impl Solution {
-    // 209. 长度最小的子数组
+    /// 209. 长度最小的子数组
     #[allow(dead_code)]
     pub fn min_sub_array_len(target: i32, nums: Vec<i32>) -> i32 {
         let (mut i, mut sum, mut res) = (0, 0, target + 1);
@@ -25,7 +25,7 @@ impl Solution {
 mod tests {
     use super::*;
 
-    // 209. 长度最小的子数组
+    /// 209. 长度最小的子数组
     #[test]
     fn min_sub_array_len() {
         let target = 7;
