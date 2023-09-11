@@ -3,8 +3,7 @@ pub struct Solution {}
 impl Solution {
     /// 66. 加一
     #[allow(dead_code)]
-    pub fn plus_one(digits: Vec<i32>) -> Vec<i32> {
-        let mut digits = digits;
+    pub fn plus_one(mut digits: Vec<i32>) -> Vec<i32> {
         let mut remaind = 1;
         for i in (0..digits.len()).rev() {
             if remaind == 0 {

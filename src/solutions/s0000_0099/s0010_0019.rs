@@ -3,9 +3,25 @@ use std::collections::HashMap;
 pub struct Solution {}
 
 impl Solution {
+    /// 11. 盛最多水的容器
+    #[allow(dead_code)]
+    pub fn max_area(height: Vec<i32>) -> i32 {
+        let (mut l, mut r) = (0, height.len() - 1);
+        let mut max_area = 0;
+        while l < r {
+            max_area = max_area.max((r - l) as i32 * height[l].min(height[r]));
+            if height[l] > height[r] {
+                r -= 1;
+            } else {
+                l += 1;
+            }
+        }
+        max_area
+    }
+
     /// 12. 整数转罗马数字
     #[allow(dead_code)]
-    pub fn int_to_roman(num: i32) -> String {
+    pub fn int_to_roman(mut num: i32) -> String {
         let value_roman_vec = vec![
             (1000, "M"),
             (900, "CM"),
@@ -22,7 +38,6 @@ impl Solution {
             (1, "I"),
         ];
         let mut res = "".to_string();
-        let mut num = num;
         for (value, roman) in value_roman_vec {
             while num >= value {
                 num -= value;
@@ -75,8 +90,7 @@ impl Solution {
 
     /// 15. 三数之和
     #[allow(dead_code)]
-    pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
-        let mut nums = nums;
+    pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
         nums.sort_unstable();
         let mut res = Vec::new();
         for i in 0..nums.len() {
@@ -110,6 +124,14 @@ impl Solution {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// 11. 盛最多水的容器
+    #[test]
+    fn max_area() {
+        let height = vec![1, 8, 6, 2, 5, 4, 8, 3, 7];
+        let res = Solution::max_area(height);
+        assert_eq!(res, 49);
+    }
 
     /// 12. 整数转罗马数字
     #[test]

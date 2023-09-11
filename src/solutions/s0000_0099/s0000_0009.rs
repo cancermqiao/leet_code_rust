@@ -1,8 +1,20 @@
-use std::ops::Div;
-
 pub struct Solution {}
 
 impl Solution {
+    /// 1. 两数之和
+    #[allow(dead_code)]
+    pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
+        let mut cache = std::collections::HashMap::new();
+        for (i, num) in nums.iter().enumerate() {
+            if let Some(&v) = cache.get(num) {
+                return vec![v, i as i32];
+            } else {
+                cache.insert(target - num, i as i32);
+            }
+        }
+        vec![-1, -1]
+    }
+
     /// 3. 无重复字符的最长子串
     #[allow(dead_code)]
     pub fn length_of_longest_substring(s: String) -> i32 {
@@ -44,7 +56,7 @@ impl Solution {
     
     /// 9. 回文数
     #[allow(dead_code)]
-    pub fn is_palindrome(x: i32) -> bool {
+    pub fn is_palindrome(mut x: i32) -> bool {
         // 0
         if x == 0 {
             return true;
@@ -54,7 +66,6 @@ impl Solution {
             return false;
         }
         let mut reverted_number = 0;
-        let mut x = x;
         while x > reverted_number {
             let (quotient, remaind) = (x / 10, x % 10);
             reverted_number = reverted_number * 10 + remaind;
@@ -67,6 +78,15 @@ impl Solution {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// 1. 两数之和
+    #[test]
+    fn two_sum() {
+        let nums = vec![2,7,11,15];
+        let target = 9;
+        let res = Solution::two_sum(nums, target);
+        assert_eq!(res, vec![0,1]);
+    }
 
     /// 3. 无重复字符的最长子串
     #[test]

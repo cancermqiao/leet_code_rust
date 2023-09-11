@@ -1,6 +1,21 @@
 pub struct Solution {}
 
 impl Solution {
+    /// 162. 寻找峰值
+    #[allow(dead_code)]
+    pub fn find_peak_element(nums: Vec<i32>) -> i32 {
+        let (mut l, mut r) = (0, nums.len() as i32 - 1);
+        while l < r {
+            let p = (l + r) / 2;
+            if nums[p as usize] > nums[p as usize + 1] {
+                r = p;
+            } else {
+                l = p + 1;
+            }
+        };
+        l
+    }
+
     /// 167. 两数之和 II - 输入有序数组
     #[allow(dead_code)]
     pub fn two_sum(numbers: Vec<i32>, target: i32) -> Vec<i32> {
@@ -41,6 +56,14 @@ impl Solution {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// 162. 寻找峰值
+    #[test]
+    fn find_peak_element() {
+        let nums = vec![1,2,3,1];
+        let res = Solution::find_peak_element(nums);
+        assert_eq!(res, 2);
+    }
 
     /// 167. 两数之和 II - 输入有序数组
     #[test]

@@ -38,6 +38,26 @@ impl Solution {
         }
         true
     }
+    
+    /// 128. 最长连续序列
+    #[allow(dead_code)]
+    pub fn longest_consecutive(nums: Vec<i32>) -> i32 {
+        let nums: std::collections::HashSet<i32> = nums.into_iter().collect();
+        let mut longest_length = 0;
+        for num in nums.iter() {
+            if !nums.contains(&(num - 1)) {
+                let mut cur_num = *num;
+                let mut length = 1;
+                while nums.contains(&(cur_num + 1)) {
+                    length += 1;
+                    cur_num += 1;
+                }
+                longest_length = longest_length.max(length);
+            }
+
+        }
+        longest_length
+    }
 }
 
 #[cfg(test)]
@@ -66,5 +86,13 @@ mod tests {
         let s = "A man, a plan, a canal: Panama".to_string();
         let res = Solution::is_palindrome(s);
         assert_eq!(res, true);
+    }
+
+    /// 128. 最长连续序列
+    #[test]
+    fn longest_consecutive() {
+        let nums = vec![100,4,200,1,3,2];
+        let res = Solution::longest_consecutive(nums);
+        assert_eq!(res, 4);
     }
 }

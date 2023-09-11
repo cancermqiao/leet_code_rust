@@ -53,8 +53,7 @@ impl Solution {
 
     /// 56. 合并区间
     #[allow(dead_code)]
-    pub fn merge(intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-        let mut intervals = intervals;
+    pub fn merge(mut intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         intervals.sort_by_key(|k| k[0]);
 
         let mut merged_intervals: Vec<Vec<i32>> = Vec::new();
