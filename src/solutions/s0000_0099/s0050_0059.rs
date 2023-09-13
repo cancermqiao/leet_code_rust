@@ -1,6 +1,28 @@
 pub struct Solution {}
 
 impl Solution {
+    /// 50. Pow(x, n)
+    fn quick_mul(x: f64, n: i64) -> f64 {
+        if n == 0 {
+            return 1.;
+        }
+        let res = Self::quick_mul(x, n / 2);
+        if n % 2 == 1 {
+            res * res * x
+        } else {
+            res * res
+        }
+    }
+
+    #[allow(dead_code)]
+    pub fn my_pow(x: f64, n: i32) -> f64 {
+        if n >= 0 {
+            Self::quick_mul(x, n as i64)
+        } else {
+            1. / Self::quick_mul(x, -(n as i64))
+        }
+    }
+
     /// 54. 螺旋矩阵
     #[allow(dead_code)]
     pub fn spiral_order(matrix: Vec<Vec<i32>>) -> Vec<i32> {
@@ -70,7 +92,7 @@ impl Solution {
         }
         merged_intervals
     }
-    
+
     /// 57. 插入区间
     #[allow(dead_code)]
     pub fn insert(intervals: Vec<Vec<i32>>, new_interval: Vec<i32>) -> Vec<Vec<i32>> {
@@ -107,7 +129,7 @@ impl Solution {
             if c != ' ' {
                 res += 1;
             } else if res > 0 {
-                return res
+                return res;
             }
         }
         res
@@ -117,6 +139,15 @@ impl Solution {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// 50. Pow(x, n)
+    #[test]
+    pub fn my_pow() {
+        let x = 2.00000;
+        let n = 10;
+        let res = Solution::my_pow(x, n);
+        assert_eq!(res, 1024.0);
+    }
 
     /// 54. 螺旋矩阵
     #[test]
@@ -152,14 +183,14 @@ mod tests {
             vec![vec![1, 6], vec![8, 10], vec![15, 18]]
         );
     }
-    
+
     /// 57. 插入区间
     #[test]
     fn insert() {
-        let intervals = vec![vec![1,3],vec![6,9]];
-        let new_interval = vec![2,5];
+        let intervals = vec![vec![1, 3], vec![6, 9]];
+        let new_interval = vec![2, 5];
         let res = Solution::insert(intervals, new_interval);
-        assert_eq!(res, vec![vec![1,5],vec![6,9]]);
+        assert_eq!(res, vec![vec![1, 5], vec![6, 9]]);
     }
 
     /// 58. 最后一个单次

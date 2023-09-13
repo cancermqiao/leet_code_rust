@@ -2,6 +2,8 @@ pub struct Solution {}
 
 impl Solution {
     /// 215. 数组中的第k个最大元素
+    ///
+    /// # 快排分治
     #[allow(dead_code)]
     pub fn find_kth_largest(mut nums: Vec<i32>, k: i32) -> i32 {
         fn helper(nums: &mut Vec<i32>, l: usize, r: usize, k: i32) -> i32 {
@@ -53,7 +55,7 @@ mod tests {
     /// 215. 数组中的第k个最大元素
     #[test]
     fn find_kth_largest() {
-        let nums = vec![3,2,3,1,2,4,5,5,6];
+        let nums = vec![3, 2, 3, 1, 2, 4, 5, 5, 6];
         let k = 4;
         let res = Solution::find_kth_largest(nums, k);
         assert_eq!(res, 4);
@@ -62,7 +64,7 @@ mod tests {
     /// 219. 存在重复元素 II
     #[test]
     fn contains_nearby_duplicate() {
-        let nums = vec![1,2,3,1];
+        let nums = vec![1, 2, 3, 1];
         let k = 3;
         let res = Solution::contains_nearby_duplicate(nums, k);
         assert_eq!(res, true);

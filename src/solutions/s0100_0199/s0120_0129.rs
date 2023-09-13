@@ -1,6 +1,17 @@
 pub struct Solution {}
 
 impl Solution {
+    /// 120. 三角形最小路径和
+    #[allow(dead_code)]
+    pub fn minimum_total(mut triangle: Vec<Vec<i32>>) -> i32 {
+        for level in (0..triangle.len()-1).rev() {
+            for i in 0..triangle[level].len() {
+                triangle[level][i] += triangle[level+1][i].min(triangle[level+1][i+1]);
+            }
+        }
+        triangle[0][0]
+    }
+
     /// 121. 买卖股票的最佳时机
     #[allow(dead_code)]
     pub fn max_profit(prices: Vec<i32>) -> i32 {
@@ -38,7 +49,7 @@ impl Solution {
         }
         true
     }
-    
+
     /// 128. 最长连续序列
     #[allow(dead_code)]
     pub fn longest_consecutive(nums: Vec<i32>) -> i32 {
@@ -54,7 +65,6 @@ impl Solution {
                 }
                 longest_length = longest_length.max(length);
             }
-
         }
         longest_length
     }
@@ -63,6 +73,14 @@ impl Solution {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// 120. 三角形最小路径和
+    #[test]
+    fn minimum_total() {
+        let triangle = vec![vec![2], vec![3, 4], vec![6, 5, 7], vec![4, 1, 8, 3]];
+        let res = Solution::minimum_total(triangle);
+        assert_eq!(res, 11);
+    }
 
     /// 121. 买卖股票的最佳时机
     #[test]
@@ -91,7 +109,7 @@ mod tests {
     /// 128. 最长连续序列
     #[test]
     fn longest_consecutive() {
-        let nums = vec![100,4,200,1,3,2];
+        let nums = vec![100, 4, 200, 1, 3, 2];
         let res = Solution::longest_consecutive(nums);
         assert_eq!(res, 4);
     }
