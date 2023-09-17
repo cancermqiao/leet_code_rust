@@ -119,6 +119,60 @@ impl Solution {
         }
         res
     }
+
+    /// 18. 四数之和
+    #[allow(dead_code)]
+    pub fn four_sum(mut nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+        let mut res = Vec::new();
+        let n = nums.len();
+        if n < 4 {
+            return res;
+        }
+        let target = target as i64;
+        nums.sort();
+        for i in 0..n-3 {
+            if i > 0 && nums[i] == nums[i-1] {
+                continue;
+            }
+            if nums[i] as i64 + nums[i+1] as i64 + nums[i+2] as i64 + nums[i+3] as i64 > target {
+                break;
+            }
+            if (nums[i] as i64 + nums[n-3] as i64 + nums[n-2] as i64 + nums[n-1] as i64) < target {
+                continue;
+            }
+            for j in i+1..n-2 {
+                if j > i + 1 && nums[j] == nums[j-1] {
+                    continue;
+                }
+                if nums[i] as i64 + nums[j] as i64 + nums[j+1] as i64 + nums[j+2] as i64 > target {
+                    break;
+                }
+                if (nums[i] as i64 + nums[j] as i64 + nums[n-2] as i64 + nums[n-1] as i64) < target {
+                    continue;
+                }
+                let (mut l, mut r) = (j+1, n-1);
+                while l < r {
+                    let sum = nums[i] as i64 + nums[j] as i64 + nums[l] as i64 + nums[r] as i64;
+                    if sum == target {
+                        res.push(vec![nums[i], nums[j], nums[l], nums[r]]);
+                        while l < r && nums[l] == nums[l+1] {
+                            l += 1;
+                        }
+                        l += 1;
+                        while l < r && nums[r] == nums[r-1] {
+                            r -= 1;
+                        }
+                        r -= 1;
+                    } else if sum > target {
+                        r -= 1;
+                    } else {
+                        l += 1;
+                    }
+                }
+            }
+        }
+        res
+    }
 }
 
 #[cfg(test)]
@@ -167,5 +221,17 @@ mod tests {
         let nums = vec![-1, 0, 1, 2, -1, -4];
         let res = Solution::three_sum(nums);
         assert_eq!(res, vec![vec![-1, -1, 2], vec![-1, 0, 1]]);
+    }
+
+    /// 18. 四数之和
+    #[test]
+    fn four_sum() {
+        let nums = vec![1, 0, -1, 0, -2, 2];
+        let target = 0;
+        let res = Solution::four_sum(nums, target);
+        assert_eq!(
+            res,
+            vec![vec![-2, -1, 1, 2], vec![-2, 0, 0, 2], vec![-1, 0, 0, 1]]
+        );
     }
 }

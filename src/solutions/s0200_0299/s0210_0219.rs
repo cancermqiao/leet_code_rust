@@ -1,6 +1,29 @@
 pub struct Solution {}
 
 impl Solution {
+    /// 213. 打家劫舍 II
+    fn rob_range(nums: &Vec<i32>, l: usize, r: usize) -> i32 {
+        let (mut pre, mut cur) = (0, 0);
+        for i in l..=r {
+            let tmp = cur;
+            cur = pre + nums[i];
+            pre = pre.max(tmp);
+        }
+        pre.max(cur)
+    }
+
+    #[allow(dead_code)]
+    pub fn rob(nums: Vec<i32>) -> i32 {
+        let n = nums.len();
+        if n == 1 {
+            return nums[0];
+        } else if n == 2 {
+            return nums[0].max(nums[1]);
+        } else {
+            Self::rob_range(&nums, 0, n - 2).max(Self::rob_range(&nums, 1, n - 1))
+        }
+    }
+
     /// 215. 数组中的第k个最大元素
     ///
     /// # 快排分治
@@ -51,6 +74,14 @@ impl Solution {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// 213. 打家劫舍 II
+    #[test]
+    fn rob() {
+        let nums = vec![2,3,2];
+        let res = Solution::rob(nums);
+        assert_eq!(res, 3);
+    }
 
     /// 215. 数组中的第k个最大元素
     #[test]

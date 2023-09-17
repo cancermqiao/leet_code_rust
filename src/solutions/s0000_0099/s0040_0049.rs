@@ -1,6 +1,25 @@
 pub struct Solution {}
 
 impl Solution {
+    /// 42. 接雨水
+    #[allow(dead_code)]
+    pub fn trap(height: Vec<i32>) -> i32 {
+        let mut stack = Vec::new();
+        let mut res = 0;
+        for i in 0..height.len() {
+            while !stack.is_empty() && height[i] > height[*stack.last().unwrap()] {
+                let top = stack.pop().unwrap();
+                if stack.is_empty() {
+                    break;
+                }
+                let left = *stack.last().unwrap();
+                res += (height[i].min(height[left]) - height[top]) * (i as i32 - left as i32 - 1);
+            }
+            stack.push(i);
+        }
+        res
+    }
+
     /// 45. 跳跃游戏 II
     #[allow(dead_code)]
     pub fn jump(nums: Vec<i32>) -> i32 {
@@ -53,6 +72,14 @@ impl Solution {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// 42. 接雨水
+    #[test]
+    fn trap() {
+        let height = vec![0,1,0,2,1,0,1,3,2,1,2,1];
+        let res = Solution::trap(height);
+        assert_eq!(res, 6);
+    }
 
     /// 45. 跳跃游戏 II
     #[test]

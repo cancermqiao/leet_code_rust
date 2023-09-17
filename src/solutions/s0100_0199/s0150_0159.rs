@@ -28,6 +28,18 @@ impl Solution {
         s.split_whitespace().rev().collect::<Vec<&str>>().join(" ")
     }
 
+    /// 152. 乘积最大子数组
+    #[allow(dead_code)]
+    pub fn max_product(nums: Vec<i32>) -> i32 {
+        let mut dp_max = vec![nums[0]];
+        let mut dp_min = vec![nums[0]];
+        for i in 1..nums.len() {
+            dp_max.push(nums[i].max(nums[i] * dp_max[i-1]).max(nums[i] * dp_min[i-1]));
+            dp_min.push(nums[i].min(nums[i] * dp_max[i-1]).min(nums[i] * dp_min[i-1]));
+        }
+        *dp_max.iter().max().unwrap()
+    }
+
     /// 153. 寻找旋转排序数组中的最小值
     #[allow(dead_code)]
     pub fn find_min(nums: Vec<i32>) -> i32 {
@@ -71,6 +83,14 @@ mod tests {
         let s = "  hello world  ".to_string();
         let res = Solution::reverse_words(s);
         assert_eq!(res, "world hello".to_string());
+    }
+
+    /// 152. 乘积最大子数组
+    #[test]
+    fn max_product() {
+        let nums = vec![2,3,-2,4];
+        let res = Solution::max_product(nums);
+        assert_eq!(res, 6);
     }
 
     /// 153. 寻找旋转排序数组中的最小值
