@@ -34,8 +34,16 @@ impl Solution {
         let mut dp_max = vec![nums[0]];
         let mut dp_min = vec![nums[0]];
         for i in 1..nums.len() {
-            dp_max.push(nums[i].max(nums[i] * dp_max[i-1]).max(nums[i] * dp_min[i-1]));
-            dp_min.push(nums[i].min(nums[i] * dp_max[i-1]).min(nums[i] * dp_min[i-1]));
+            dp_max.push(
+                nums[i]
+                    .max(nums[i] * dp_max[i - 1])
+                    .max(nums[i] * dp_min[i - 1]),
+            );
+            dp_min.push(
+                nums[i]
+                    .min(nums[i] * dp_max[i - 1])
+                    .min(nums[i] * dp_min[i - 1]),
+            );
         }
         *dp_max.iter().max().unwrap()
     }
@@ -88,7 +96,7 @@ mod tests {
     /// 152. 乘积最大子数组
     #[test]
     fn max_product() {
-        let nums = vec![2,3,-2,4];
+        let nums = vec![2, 3, -2, 4];
         let res = Solution::max_product(nums);
         assert_eq!(res, 6);
     }
@@ -96,7 +104,7 @@ mod tests {
     /// 153. 寻找旋转排序数组中的最小值
     #[test]
     fn find_min() {
-        let nums = vec![3,4,5,1,2];
+        let nums = vec![3, 4, 5, 1, 2];
         let res = Solution::find_min(nums);
         assert_eq!(res, 1);
     }

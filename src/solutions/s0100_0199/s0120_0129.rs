@@ -38,6 +38,20 @@ impl Solution {
         profit
     }
 
+    /// 123. 买卖股票的最佳时机 III
+    #[allow(dead_code)]
+    pub fn max_profit_v3(prices: Vec<i32>) -> i32 {
+        let (mut buy1, mut buy2) = (-prices[0], -prices[0]);
+        let (mut sell1, mut sell2) = (0, 0);
+        for price in &prices[1..] {
+            buy1 = buy1.max(-price);
+            sell1 = sell1.max(buy1 + price);
+            buy2 = buy2.max(sell1 - price);
+            sell2 = sell2.max(buy2 + price);
+        }
+        sell2
+    }
+
     /// 125. 验证回文串
     #[allow(dead_code)]
     pub fn is_palindrome(s: String) -> bool {
@@ -96,6 +110,14 @@ mod tests {
         let prices = vec![7, 1, 5, 3, 6, 4];
         let profit = Solution::max_profit_v2(prices);
         assert_eq!(profit, 7);
+    }
+
+    /// 123. 买卖股票的最佳时机 III
+    #[test]
+    fn max_profit_v3() {
+        let prices = vec![3,3,5,0,0,3,1,4];
+        let res = Solution::max_profit_v3(prices);
+        assert_eq!(res, 6);
     }
 
     /// 125. 验证回文串

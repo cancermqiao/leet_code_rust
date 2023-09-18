@@ -14,7 +14,8 @@ impl Solution {
 
     #[allow(dead_code)]
     pub fn queens_attackthe_king(queens: Vec<Vec<i32>>, king: Vec<i32>) -> Vec<Vec<i32>> {
-        let mut res: std::collections::HashMap<(i32, i32), (Vec<i32>, i32)> = std::collections::HashMap::new();
+        let mut res: std::collections::HashMap<(i32, i32), (Vec<i32>, i32)> =
+            std::collections::HashMap::new();
         for queen in queens {
             let (dx, dy) = (queen[0] - king[0], queen[1] - king[1]);
             if dx == 0 || dy == 0 || dx.abs() == dy.abs() {
@@ -28,7 +29,7 @@ impl Solution {
                 }
             }
         }
-        res.into_iter().map(|x| x.1.0).collect()
+        res.into_iter().map(|x| x.1 .0).collect()
     }
 }
 

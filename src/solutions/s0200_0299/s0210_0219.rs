@@ -78,7 +78,7 @@ mod tests {
     /// 213. 打家劫舍 II
     #[test]
     fn rob() {
-        let nums = vec![2,3,2];
+        let nums = vec![2, 3, 2];
         let res = Solution::rob(nums);
         assert_eq!(res, 3);
     }

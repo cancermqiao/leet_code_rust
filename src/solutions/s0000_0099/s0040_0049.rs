@@ -76,7 +76,7 @@ mod tests {
     /// 42. 接雨水
     #[test]
     fn trap() {
-        let height = vec![0,1,0,2,1,0,1,3,2,1,2,1];
+        let height = vec![0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
         let res = Solution::trap(height);
         assert_eq!(res, 6);
     }

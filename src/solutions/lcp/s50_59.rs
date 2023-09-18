@@ -19,8 +19,8 @@ mod tests {
     // LCP 50. 宝石补给
     #[test]
     fn give_gem() {
-        let gem = vec![3,1,2];
-        let operations = vec![vec![0,2],vec![2,1],vec![2,0]];
+        let gem = vec![3, 1, 2];
+        let operations = vec![vec![0, 2], vec![2, 1], vec![2, 0]];
         let res = Solution::give_gem(gem, operations);
         assert_eq!(res, 2);
     }
