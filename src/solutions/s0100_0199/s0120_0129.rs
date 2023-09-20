@@ -4,9 +4,9 @@ impl Solution {
     /// 120. 三角形最小路径和
     #[allow(dead_code)]
     pub fn minimum_total(mut triangle: Vec<Vec<i32>>) -> i32 {
-        for level in (0..triangle.len()-1).rev() {
+        for level in (0..triangle.len() - 1).rev() {
             for i in 0..triangle[level].len() {
-                triangle[level][i] += triangle[level+1][i].min(triangle[level+1][i+1]);
+                triangle[level][i] += triangle[level + 1][i].min(triangle[level + 1][i + 1]);
             }
         }
         triangle[0][0]
@@ -115,7 +115,7 @@ mod tests {
     /// 123. 买卖股票的最佳时机 III
     #[test]
     fn max_profit_v3() {
-        let prices = vec![3,3,5,0,0,3,1,4];
+        let prices = vec![3, 3, 5, 0, 0, 3, 1, 4];
         let res = Solution::max_profit_v3(prices);
         assert_eq!(res, 6);
     }

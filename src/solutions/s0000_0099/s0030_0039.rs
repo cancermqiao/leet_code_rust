@@ -1,23 +1,47 @@
-use std::cmp::Ordering::{Equal, Less, Greater};
+use std::cmp::Ordering::{Equal, Greater, Less};
 
 pub struct Solution {}
 
 impl Solution {
+    /// 31. 下一个排列
+    #[allow(dead_code)]
+    pub fn next_permutation(nums: &mut Vec<i32>) {
+        let mut i = nums.len() as i32 - 2;
+        while i >= 0 && nums[i as usize] >= nums[i as usize + 1] {
+            i -= 1;
+        }
+        if i >= 0 {
+            let mut j = nums.len() - 1;
+            while nums[i as usize] >= nums[j as usize] {
+                j -= 1;
+            }
+            nums.swap(i as usize, j as usize);
+        }
+        let (mut l, mut r) = (i + 1, nums.len() as i32 - 1);
+        while l < r {
+            nums.swap(l as usize, r as usize);
+            l += 1;
+            r -= 1;
+        }
+    }
+
     /// 34. 在排序数组中查找元素的第一个和最后一个位置
     fn binary_search(nums: &Vec<i32>, target: i32, equal: bool) -> i32 {
         let (mut l, mut r) = (0, nums.len() as i32 - 1);
         while l <= r {
             let p = (l + r) / 2;
             match nums[p as usize].cmp(&target) {
-                Equal => if equal {
-                    r = p - 1;
-                } else {
-                    l = p + 1;
-                },
+                Equal => {
+                    if equal {
+                        r = p - 1;
+                    } else {
+                        l = p + 1;
+                    }
+                }
                 Less => l = p + 1,
                 Greater => r = p - 1,
             }
-        };
+        }
         l
     }
 
@@ -78,10 +102,18 @@ impl Solution {
 mod tests {
     use super::*;
 
+    /// 31. 下一个排列
+    #[test]
+    fn next_permutation() {
+        let mut nums = vec![1, 2, 3];
+        Solution::next_permutation(&mut nums);
+        assert_eq!(nums, vec![1, 3, 2]);
+    }
+
     /// 34. 在排序数组中查找元素的第一个和最后一个位置
     #[test]
     fn search_range() {
-        let nums = vec![5,7,7,8,8,10];
+        let nums = vec![5, 7, 7, 8, 8, 10];
         let target = 8;
         let res = Solution::search_range(nums, target);
         assert_eq!(res, vec![3, 4]);
@@ -90,7 +122,7 @@ mod tests {
     /// 35. 搜索插入位置
     #[test]
     fn search_insert() {
-        let nums = vec![1,3,5,6];
+        let nums = vec![1, 3, 5, 6];
         let target = 5;
         let res = Solution::search_insert(nums, target);
         assert_eq!(res, 2);

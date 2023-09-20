@@ -25,10 +25,10 @@ impl Solution {
 
     /// 2. 两数相加
     fn carried(
-        l1: Option<Box<ListNode>>,
-        l2: Option<Box<ListNode>>,
+        l1: Option<Box<ListNode<i32>>>,
+        l2: Option<Box<ListNode<i32>>>,
         mut carry: i32,
-    ) -> Option<Box<ListNode>> {
+    ) -> Option<Box<ListNode<i32>>> {
         if l1.is_none() && l2.is_none() && carry == 0 {
             None
         } else {
@@ -51,9 +51,9 @@ impl Solution {
 
     #[allow(dead_code)]
     pub fn add_two_numbers(
-        l1: Option<Box<ListNode>>,
-        l2: Option<Box<ListNode>>,
-    ) -> Option<Box<ListNode>> {
+        l1: Option<Box<ListNode<i32>>>,
+        l2: Option<Box<ListNode<i32>>>,
+    ) -> Option<Box<ListNode<i32>>> {
         Self::carried(l1, l2, 0)
     }
 
@@ -160,6 +160,20 @@ impl Solution {
         res.join("")
     }
 
+    /// 7. 整数反转
+    #[allow(dead_code)]
+    pub fn reverse(mut x: i32) -> i32 {
+        let mut res = 0;
+        while x != 0 {
+            if res > i32::MAX/10 || res < i32::MIN/10 {
+                return 0;
+            }
+            res = res * 10 + x % 10;
+            x = x / 10;
+        }
+        res
+    }
+
     /// 8. 字符串转换整数（atoi）
     #[allow(dead_code)]
     pub fn my_atoi(s: String) -> i32 {
@@ -224,6 +238,8 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
+    use crate::data::list::List;
+
     use super::*;
 
     /// 1. 两数之和
@@ -233,6 +249,20 @@ mod tests {
         let target = 9;
         let res = Solution::two_sum(nums, target);
         assert_eq!(res, vec![0, 1]);
+    }
+
+    /// 2. 两数相加
+    #[test]
+    fn add_two_numbers() {
+        let l1 = vec![2, 4, 3];
+        let l2 = vec![5, 6, 4];
+        let l1 = List::new(&l1).head;
+        let l2 = List::new(&l2).head;
+        let res = List {
+            head: Solution::add_two_numbers(l1, l2),
+        }
+        .to_vec();
+        assert_eq!(res, vec![7, 0, 8]);
     }
 
     /// 3. 无重复字符的最长子串
@@ -260,13 +290,21 @@ mod tests {
         assert_eq!(res, "bab".to_string());
     }
 
-    ///6. N字形变换
+    /// 6. N字形变换
     #[test]
     fn convert() {
         let s = "PAYPALISHIRING".to_string();
         let num_rows = 3;
         let res = Solution::convert(s, num_rows);
         assert_eq!(res, "PAHNAPLSIIGYIR".to_string())
+    }
+
+    /// 7. 整数反转
+    #[test]
+    fn reverse() {
+        let x = i32::MAX;
+        let res = Solution::reverse(x);
+        assert_eq!(res, 0);
     }
 
     /// 8. 字符串转换整数（atoi）
