@@ -251,6 +251,87 @@ impl Solution {
             &mut valid,
         );
     }
+
+    /// 38. 外观数列
+    ///
+    /// # 递归
+    fn recursion(n: i32) -> String {
+        if n == 1 {
+            return "1".to_string();
+        }
+        let s = Self::recursion(n - 1);
+        let (mut pre, mut cnt, mut res) = (' ', 0, "".to_string());
+        for c in s.chars() {
+            if cnt == 0 {
+                pre = c;
+                cnt += 1;
+            } else if c == pre {
+                cnt += 1;
+            } else {
+                res.push_str(&format!("{}{}", cnt, pre));
+                cnt = 1;
+                pre = c;
+            }
+        }
+        res.push_str(&format!("{}{}", cnt, pre));
+        res
+    }
+
+    /// # 迭代
+    fn iteration(n: i32) -> String {
+        let mut res = "1".to_string();
+        for _ in 1..n {
+            let (mut pre, mut cnt, mut tmp) = (' ', 0, "".to_string());
+            for c in res.chars() {
+                if cnt == 0 {
+                    pre = c;
+                    cnt += 1;
+                } else if c == pre {
+                    cnt += 1;
+                } else {
+                    tmp.push_str(&format!("{}{}", cnt, pre));
+                    cnt = 1;
+                    pre = c;
+                }
+            }
+            tmp.push_str(&format!("{}{}", cnt, pre));
+            res = tmp;
+        }
+        res
+    }
+
+    #[allow(dead_code)]
+    pub fn count_and_say(n: i32, method_type: &str) -> String {
+        match method_type {
+            "recursion" => Self::recursion(n),
+            "iteration" => Self::iteration(n),
+            _ => Self::iteration(n),
+        }
+    }
+
+    /// 39. 组合总和
+    fn backtrace(candidates: &Vec<i32>, target: i32, buf: &mut Vec<i32>, res: &mut Vec<Vec<i32>>, idx: usize) {
+        if idx == candidates.len() {
+            return;
+        }
+        if target == 0 {
+            res.push(buf.clone());
+            return
+        }
+        Self::backtrace(candidates, target, buf, res, idx + 1);
+        if target - candidates[idx] >= 0 {
+            buf.push(candidates[idx]);
+            Self::backtrace(candidates, target - candidates[idx], buf, res, idx);
+            buf.pop();
+        }
+    }
+
+    #[allow(dead_code)]
+    pub fn combination_sum(candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+        let (mut buf, mut res) = (Vec::new(), Vec::new());
+        Self::backtrace(&candidates, target, &mut buf, &mut res, 0);
+        res
+    }
 }
 
 #[cfg(test)]
@@ -356,5 +437,25 @@ mod tests {
                 vec!['3', '4', '5', '2', '8', '6', '1', '7', '9']
             ]
         );
+    }
+
+    /// 38. 外观数列
+    #[test]
+    fn count_and_say() {
+        let n = 4;
+        let res = Solution::count_and_say(n, "recursion");
+        assert_eq!(res, "1211");
+        let res = Solution::count_and_say(n, "iteration");
+        assert_eq!(res, "1211");
+    }
+
+    /// 39. 组合总和
+    #[test]
+    fn combination_sum() {
+        let candidates = vec![2, 3, 6, 7];
+        let target = 7;
+        let mut res = Solution::combination_sum(candidates, target);
+        res.sort();
+        assert_eq!(res, vec![vec![2, 2, 3], vec![7]]);
     }
 }

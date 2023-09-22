@@ -1,6 +1,32 @@
 pub struct Solution {}
 
 impl Solution {
+    /// 2591. 将钱分给最多的儿童
+    #[allow(dead_code)]
+    pub fn dist_money(mut money: i32, children: i32) -> i32 {
+        if money < children {
+            return -1;
+        }
+        if money < children + 7 {
+            return 0;
+        }
+        money -= children;
+        let (num, left) = (money / 7, money % 7);
+        if num > children {
+            children - 1
+        } else if num == children {
+            if left > 0 {
+                children - 1
+            } else {
+                children
+            }
+        } else if num == children - 1 && left == 3 {
+            children - 2
+        } else {
+            num
+        }
+    }
+
     /// 2594. 修车的最少时间
     #[allow(dead_code)]
     pub fn repair_cars(ranks: Vec<i32>, cars: i32) -> i64 {
@@ -60,6 +86,15 @@ impl Solution {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// 2591. 将钱分给最多的儿童
+    #[test]
+    fn dist_money() {
+        let money = 20;
+        let children = 3;
+        let res = Solution::dist_money(money, children);
+        assert_eq!(res, 1);
+    }
 
     /// 2594. 修车的最少时间
     #[test]
