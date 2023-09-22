@@ -310,13 +310,19 @@ impl Solution {
     }
 
     /// 39. 组合总和
-    fn backtrace(candidates: &Vec<i32>, target: i32, buf: &mut Vec<i32>, res: &mut Vec<Vec<i32>>, idx: usize) {
+    fn backtrace(
+        candidates: &Vec<i32>,
+        target: i32,
+        buf: &mut Vec<i32>,
+        res: &mut Vec<Vec<i32>>,
+        idx: usize,
+    ) {
         if idx == candidates.len() {
             return;
         }
         if target == 0 {
             res.push(buf.clone());
-            return
+            return;
         }
         Self::backtrace(candidates, target, buf, res, idx + 1);
         if target - candidates[idx] >= 0 {
