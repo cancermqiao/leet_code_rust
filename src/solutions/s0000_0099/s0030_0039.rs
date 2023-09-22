@@ -3,6 +3,50 @@ use std::cmp::Ordering::{Equal, Greater, Less};
 pub struct Solution {}
 
 impl Solution {
+    /// 30. 串联所有单词的子串
+    #[allow(dead_code)]
+    pub fn find_substring(s: String, words: Vec<String>) -> Vec<i32> {
+        let mut res = Vec::new();
+        let (m, n, ls) = (words[0].len(), words.len(), s.len());
+        for i in 0..m {
+            if i + m * n > ls {
+                break;
+            }
+            let mut count = std::collections::HashMap::new();
+            for j in 0..n {
+                let word = &s[i + j * m..i + (j + 1) * m];
+                count.insert(word, count.get(word).unwrap_or(&0) + 1);
+            }
+            for word in &words {
+                let _ = match count.get(word.as_str()) {
+                    None => count.insert(word, -1),
+                    Some(1) => count.remove(word.as_str()),
+                    Some(a) => count.insert(word, a - 1),
+                };
+            }
+            for start in (i..(ls - m * n + 1)).step_by(m) {
+                if start != i {
+                    let word = &s[start + (n - 1) * m..start + n * m];
+                    let _ = match count.get(word) {
+                        None => count.insert(word, 1),
+                        Some(-1) => count.remove(word),
+                        Some(a) => count.insert(word, a + 1),
+                    };
+                    let word = &s[start - m..start];
+                    let _ = match count.get(word) {
+                        None => count.insert(word, -1),
+                        Some(1) => count.remove(word),
+                        Some(a) => count.insert(word, a - 1),
+                    };
+                }
+                if count.len() == 0 {
+                    res.push(start as i32);
+                }
+            }
+        }
+        res
+    }
+
     /// 31. 下一个排列
     #[allow(dead_code)]
     pub fn next_permutation(nums: &mut Vec<i32>) {
@@ -25,7 +69,56 @@ impl Solution {
         }
     }
 
+    /// 32. 最长有效括号
+    #[allow(dead_code)]
+    pub fn longest_valid_parentheses(s: String) -> i32 {
+        let s = s.as_bytes();
+        let mut res = 0;
+        let mut stack = vec![-1];
+        for i in 0..s.len() {
+            if s[i] == b'(' {
+                stack.push(i as i32);
+            } else {
+                stack.pop();
+                if stack.is_empty() {
+                    stack.push(i as i32);
+                } else {
+                    res = res.max(i as i32 - stack.last().unwrap());
+                }
+            }
+        }
+        res as i32
+    }
+
+    /// 33. 搜索旋转排序数组
+    #[allow(dead_code)]
+    pub fn search(nums: Vec<i32>, target: i32) -> i32 {
+        let (mut l, mut r) = (0, nums.len() - 1);
+        while l <= r {
+            let p = (l + r) / 2;
+            if nums[p] == target {
+                return p as i32;
+            }
+            if nums[p] < nums[l] {
+                if target > nums[p] && nums[r] >= target {
+                    l = p + 1;
+                } else {
+                    r = p - 1;
+                }
+            } else {
+                if target < nums[p] && nums[l] <= target {
+                    r = p - 1;
+                } else {
+                    l = p + 1;
+                }
+            }
+        }
+        -1
+    }
+
     /// 34. 在排序数组中查找元素的第一个和最后一个位置
+    ///
+    /// 二分查找第一个大于或者大于等于target的下标
     fn binary_search(nums: &Vec<i32>, target: i32, equal: bool) -> i32 {
         let (mut l, mut r) = (0, nums.len() as i32 - 1);
         while l <= r {
@@ -96,11 +189,82 @@ impl Solution {
         }
         true
     }
+
+    /// 37. 解数独
+    fn dfs(
+        board: &mut Vec<Vec<char>>,
+        spaces: &Vec<(usize, usize)>,
+        rows: &mut Vec<Vec<bool>>,
+        cols: &mut Vec<Vec<bool>>,
+        sub_boxes: &mut Vec<Vec<bool>>,
+        pos: usize,
+        valid: &mut bool,
+    ) {
+        if pos == spaces.len() {
+            *valid = true;
+            return;
+        }
+        let (i, j) = spaces[pos];
+        for digit in 0..9 {
+            if !rows[i][digit] && !cols[j][digit] && !sub_boxes[i / 3 * 3 + j / 3][digit] {
+                rows[i][digit] = true;
+                cols[j][digit] = true;
+                sub_boxes[i / 3 * 3 + j / 3][digit] = true;
+                board[i][j] = (b'0' + digit as u8 + 1) as char;
+                Self::dfs(board, spaces, rows, cols, sub_boxes, pos + 1, valid);
+                rows[i][digit] = false;
+                cols[j][digit] = false;
+                sub_boxes[i / 3 * 3 + j / 3][digit] = false;
+            }
+            if *valid {
+                return;
+            }
+        }
+    }
+
+    #[allow(dead_code)]
+    pub fn solve_sudoku(board: &mut Vec<Vec<char>>) {
+        let mut rows = vec![vec![false; 9]; 9];
+        let mut cols = vec![vec![false; 9]; 9];
+        let mut sub_boxes = vec![vec![false; 9]; 9];
+        let mut spaces = Vec::new();
+        let mut valid = false;
+        for i in 0..board.len() {
+            for j in 0..board[0].len() {
+                if board[i][j] == '.' {
+                    spaces.push((i, j));
+                } else {
+                    let digit = board[i][j].to_digit(10).unwrap() as usize - 1;
+                    rows[i][digit] = true;
+                    cols[j][digit] = true;
+                    sub_boxes[i / 3 * 3 + j / 3][digit] = true;
+                }
+            }
+        }
+        Self::dfs(
+            board,
+            &spaces,
+            &mut rows,
+            &mut cols,
+            &mut sub_boxes,
+            0,
+            &mut valid,
+        );
+    }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// 30. 串联所有单词的子串
+    #[test]
+    fn find_substring() {
+        let s = "barfoothefoobarman".to_string();
+        let words = vec!["foo".to_string(), "bar".to_string()];
+        let res = Solution::find_substring(s, words);
+        assert_eq!(res, vec![0, 9]);
+    }
 
     /// 31. 下一个排列
     #[test]
@@ -108,6 +272,23 @@ mod tests {
         let mut nums = vec![1, 2, 3];
         Solution::next_permutation(&mut nums);
         assert_eq!(nums, vec![1, 3, 2]);
+    }
+
+    /// 32. 最长有效括号
+    #[test]
+    fn longest_valid_parentheses() {
+        let s = "(()".to_string();
+        let res = Solution::longest_valid_parentheses(s);
+        assert_eq!(res, 2);
+    }
+
+    /// 33. 搜索旋转排序数组
+    #[test]
+    fn search() {
+        let nums = vec![4, 5, 6, 7, 0, 1, 2];
+        let target = 0;
+        let res = Solution::search(nums, target);
+        assert_eq!(res, 4);
     }
 
     /// 34. 在排序数组中查找元素的第一个和最后一个位置
@@ -144,5 +325,36 @@ mod tests {
         ];
         let res = Solution::is_valid_sudoku(board);
         assert_eq!(res, true);
+    }
+
+    /// 37. 解数独
+    #[test]
+    fn solve_sudoku() {
+        let mut board = vec![
+            vec!['5', '3', '.', '.', '7', '.', '.', '.', '.'],
+            vec!['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+            vec!['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+            vec!['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+            vec!['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+            vec!['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+            vec!['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+            vec!['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+            vec!['.', '.', '.', '.', '8', '.', '.', '7', '9'],
+        ];
+        Solution::solve_sudoku(&mut board);
+        assert_eq!(
+            board,
+            vec![
+                vec!['5', '3', '4', '6', '7', '8', '9', '1', '2'],
+                vec!['6', '7', '2', '1', '9', '5', '3', '4', '8'],
+                vec!['1', '9', '8', '3', '4', '2', '5', '6', '7'],
+                vec!['8', '5', '9', '7', '6', '1', '4', '2', '3'],
+                vec!['4', '2', '6', '8', '5', '3', '7', '9', '1'],
+                vec!['7', '1', '3', '9', '2', '4', '8', '5', '6'],
+                vec!['9', '6', '1', '5', '3', '7', '2', '8', '4'],
+                vec!['2', '8', '7', '4', '1', '9', '6', '3', '5'],
+                vec!['3', '4', '5', '2', '8', '6', '1', '7', '9']
+            ]
+        );
     }
 }
