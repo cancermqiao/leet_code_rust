@@ -100,13 +100,13 @@ impl Solution {
 
     /// 136. 只出现一次的数字
     #[allow(dead_code)]
-    pub fn single_number_v1(nums: Vec<i32>) -> i32 {
+    pub fn single_number1(nums: Vec<i32>) -> i32 {
         nums.iter().fold(0, |acc, num| acc ^ num)
     }
 
     /// 137. 只出现一次的数字 II
     #[allow(dead_code)]
-    pub fn single_number_v2(nums: Vec<i32>) -> i32 {
+    pub fn single_number2(nums: Vec<i32>) -> i32 {
         let mut res = 0;
         for i in 0..32 {
             let mut count = 0;
@@ -191,17 +191,17 @@ mod tests {
 
     /// 136. 只出现一次的数字
     #[test]
-    fn single_number_v1() {
+    fn single_number1() {
         let nums = vec![2, 2, 1];
-        let res = Solution::single_number_v1(nums);
+        let res = Solution::single_number1(nums);
         assert_eq!(res, 1);
     }
 
     /// 137. 只出现一次的数字 II
     #[test]
-    fn single_number_v2() {
+    fn single_number2() {
         let nums = vec![2, 2, 3, 2];
-        let res = Solution::single_number_v2(nums);
+        let res = Solution::single_number2(nums);
         assert_eq!(res, 3);
     }
 

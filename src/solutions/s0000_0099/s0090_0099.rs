@@ -8,15 +8,16 @@ impl Solution {
         if n1 + n2 != n3 {
             return false;
         }
+        let (s1, s2, s3) = (s1.as_bytes(), s2.as_bytes(), s3.as_bytes());
         let mut dp = vec![vec![false; s2.len() + 1]; s1.len() + 1];
         dp[0][0] = true;
         for i in 0..=n1 {
             for j in 0..=n2 {
                 if i > 0 {
-                    dp[i][j] |= dp[i - 1][j] && s1.chars().nth(i - 1) == s3.chars().nth(i + j - 1);
+                    dp[i][j] |= dp[i - 1][j] && s1[i - 1] == s3[i + j - 1];
                 }
                 if j > 0 {
-                    dp[i][j] |= dp[i][j - 1] && s2.chars().nth(j - 1) == s3.chars().nth(i + j - 1);
+                    dp[i][j] |= dp[i][j - 1] && s2[j - 1] == s3[i + j - 1];
                 }
             }
         }
