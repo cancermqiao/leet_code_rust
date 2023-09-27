@@ -1,6 +1,11 @@
 pub struct Solution {}
 
 impl Solution {
+    /// 60. 第k个排列
+    pub fn get_permutation(n: i32, k: i32) -> String {
+        unimplemented!()
+    }
+
     /// 63. 不同路径 II
     #[allow(dead_code)]
     pub fn unique_paths_with_obstacles(mut obstacle_grid: Vec<Vec<i32>>) -> i32 {
