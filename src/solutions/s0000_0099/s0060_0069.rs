@@ -1,9 +1,74 @@
+use crate::data::list::ListNode;
+
 pub struct Solution {}
 
 impl Solution {
-    /// 60. 第k个排列
-    pub fn get_permutation(n: i32, k: i32) -> String {
-        unimplemented!()
+    /// 60. 排列序列
+    #[allow(dead_code)]
+    pub fn get_permutation(n: i32, mut k: i32) -> String {
+        let mut nums: Vec<String> = (1..=n as i32).map(|x| x.to_string()).collect();
+        let (mut cnts, mut multi) = (Vec::new(), 1);
+        for i in 1..n as i32 {
+            multi *= i;
+            cnts.push(multi);
+        }
+        let mut res = String::new();
+        while k > 1 {
+            let cum = cnts.pop().unwrap();
+            let index = ((k - 1) / cum) as usize;
+            res.push_str(nums[index].as_str());
+            nums.remove(index);
+            k -= index as i32 * cum;
+        }
+        res.push_str(nums.concat().as_str());
+        res
+    }
+
+    /// 61. 旋转链表
+    #[allow(dead_code)]
+    pub fn rotate_right(
+        mut head: Option<Box<ListNode<i32>>>,
+        k: i32,
+    ) -> Option<Box<ListNode<i32>>> {
+        if head.is_none() {
+            return head;
+        }
+        let mut cur = head.as_ref();
+        let mut n = 0;
+        while let Some(node) = cur {
+            n += 1;
+            cur = node.next.as_ref();
+        }
+        let left = k % n;
+        if left == 0 {
+            return head;
+        }
+        let mut cur = head.as_mut().unwrap();
+        for _ in 0..(n - left - 1) {
+            cur = cur.next.as_mut().unwrap();
+        }
+
+        let mut new_head = cur.next.take();
+
+        let mut cur = new_head.as_mut().unwrap();
+        while cur.next.is_some() {
+            cur = cur.next.as_mut().unwrap();
+        }
+        cur.next = head;
+
+        new_head
+    }
+
+    /// 62. 不同路径
+    #[allow(dead_code)]
+    pub fn unique_paths(m: i32, n: i32) -> i32 {
+        let mut res = 1;
+        let min = (m - 1).min(n - 1) as i64;
+        let sum = (m + n - 2) as i64;
+        for (a, b) in (sum - min + 1..=sum).zip(1..=min) {
+            res = res * a / b;
+        }
+        res as i32
     }
 
     /// 63. 不同路径 II
@@ -46,6 +111,12 @@ impl Solution {
             }
         }
         grid[nr - 1][nc - 1]
+    }
+
+    /// 65. 有效数字
+    #[allow(dead_code)]
+    pub fn is_number(s: String) -> bool {
+        todo!()
     }
 
     /// 66. 加一
@@ -112,7 +183,38 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
+    use crate::data::list::List;
+
     use super::*;
+
+    /// 60. 排列序列
+    #[test]
+    fn get_permutation() {
+        let n = 3;
+        let k = 3;
+        let res = Solution::get_permutation(n, k);
+        assert_eq!(res, "213".to_string());
+    }
+
+    /// 61. 旋转链表
+    #[test]
+    fn rotate_right() {
+        let vals = vec![1, 2, 3, 4, 5];
+        let k = 2;
+        let head = List::new(&vals);
+        let res = Solution::rotate_right(head.head, k);
+        let vectors = List { head: res }.to_vec();
+        assert_eq!(vectors, vec![4, 5, 1, 2, 3]);
+    }
+
+    /// 62. 不同路径
+    #[test]
+    fn unique_paths() {
+        let m = 3;
+        let n = 7;
+        let res = Solution::unique_paths(m, n);
+        assert_eq!(res, 28);
+    }
 
     /// 63. 不同路径 II
     #[test]
@@ -129,6 +231,14 @@ mod tests {
         let res = Solution::min_path_sum(grid);
         assert_eq!(res, 7);
     }
+
+    /// 65. 有效数字
+    // #[test]
+    // fn is_number() {
+    //     let s = "0".to_string();
+    //     let res = Solution::is_number(s);
+    //     assert_eq!(res, true);
+    // }
 
     /// 66. 加一
     #[test]
