@@ -113,12 +113,6 @@ impl Solution {
         grid[nr - 1][nc - 1]
     }
 
-    /// 65. 有效数字
-    #[allow(dead_code)]
-    pub fn is_number(s: String) -> bool {
-        todo!()
-    }
-
     /// 66. 加一
     #[allow(dead_code)]
     pub fn plus_one(mut digits: Vec<i32>) -> Vec<i32> {
@@ -231,14 +225,6 @@ mod tests {
         let res = Solution::min_path_sum(grid);
         assert_eq!(res, 7);
     }
-
-    /// 65. 有效数字
-    // #[test]
-    // fn is_number() {
-    //     let s = "0".to_string();
-    //     let res = Solution::is_number(s);
-    //     assert_eq!(res, true);
-    // }
 
     /// 66. 加一
     #[test]
