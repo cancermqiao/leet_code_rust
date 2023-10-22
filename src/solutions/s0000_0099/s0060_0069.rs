@@ -136,6 +136,40 @@ impl Solution {
         digits
     }
 
+    /// 67. 二进制求和
+    #[allow(dead_code)]
+    pub fn add_binary(a: String, b: String) -> String {
+        let (mut a, mut b) = (a.as_bytes().to_vec(), b.as_bytes().to_vec());
+        let mut res = String::new();
+        let mut carry = 0;
+        loop {
+            match (a.pop(), b.pop()) {
+                (Some(a), Some(b)) => {
+                    let sum = a - b'0' + b - b'0' + carry;
+                    carry = sum / 2;
+                    let left = sum % 2;
+                    res.insert(0, (b'0' + left) as char);
+                }
+                (None, Some(x)) | (Some(x), None) => {
+                    if carry == 1 {
+                        let sum = x - b'0' + carry;
+                        carry = sum / 2;
+                        let left = sum % 2;
+                        res.insert(0, (b'0' + left) as char);
+                    } else {
+                        res.insert(0, x as char);
+                    }
+                }
+                (None, None) => {
+                    if carry == 1 {
+                        res.insert(0, '1');
+                    }
+                    return res;
+                }
+            }
+        }
+    }
+
     /// 69. x的平方根
     ///
     /// # 二分查找
@@ -232,6 +266,15 @@ mod tests {
         let digits = vec![1, 2, 3];
         let res = Solution::plus_one(digits);
         assert_eq!(res, vec![1, 2, 4]);
+    }
+
+    /// 67. 二进制求和
+    #[test]
+    fn add_binary() {
+        let a = "11".to_string();
+        let b = "1".to_string();
+        let res = Solution::add_binary(a, b);
+        assert_eq!(res, "100".to_string());
     }
 
     /// 69. x的平方根
