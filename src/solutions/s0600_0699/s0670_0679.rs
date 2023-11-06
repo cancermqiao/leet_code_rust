@@ -10,10 +10,8 @@ impl Solution {
                 stack1.push(i);
             } else if c == '*' {
                 stack2.push(i);
-            } else {
-                if !(stack1.pop().is_some() || stack2.pop().is_some()) {
-                    return false;
-                }
+            } else if !(stack1.pop().is_some() || stack2.pop().is_some()) {
+                return false;
             }
         }
         while !stack1.is_empty() && !stack2.is_empty() {
@@ -34,6 +32,6 @@ mod tests {
     fn check_valid_string() {
         let s = "(*))".to_string();
         let res = Solution::check_valid_string(s);
-        assert_eq!(res, true);
+        assert!(res);
     }
 }

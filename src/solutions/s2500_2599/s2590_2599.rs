@@ -66,13 +66,16 @@ impl Solution {
                 (x + 1, y - 2),
                 (x - 1, y - 2),
             ] {
-                if nx >= 0 && nx < nr && ny >= 0 && ny < nc {
-                    if grid[nx as usize][ny as usize] == step {
-                        x = nx;
-                        y = ny;
-                        exist = true;
-                        break;
-                    }
+                if nx >= 0
+                    && nx < nr
+                    && ny >= 0
+                    && ny < nc
+                    && grid[nx as usize][ny as usize] == step
+                {
+                    x = nx;
+                    y = ny;
+                    exist = true;
+                    break;
                 }
             }
             if !exist {
@@ -116,6 +119,6 @@ mod tests {
             vec![24, 13, 2, 7, 22],
         ];
         let res = Solution::check_valid_grid(grid);
-        assert_eq!(res, true);
+        assert!(res);
     }
 }

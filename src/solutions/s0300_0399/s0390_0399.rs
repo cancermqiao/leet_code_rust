@@ -5,18 +5,17 @@ impl Solution {
     #[allow(dead_code)]
     pub fn is_subsequence(s: String, t: String) -> bool {
         let mut s_chars = s.chars();
-        let mut t_chars = t.chars();
         let mut s_c = s_chars.next();
-        while let Some(t) = t_chars.next() {
+        for t in t.chars() {
             match s_c {
                 Some(s) => {
                     if s == t {
                         s_c = s_chars.next();
                     }
-                },
-                None => return true
+                }
+                None => return true,
             }
-        }        
+        }
         s_c.is_none()
     }
 }
@@ -30,6 +29,6 @@ mod tests {
     fn is_subsequence() {
         let (s, t) = ("abc".to_string(), "ahbgdc".to_string());
         let res = Solution::is_subsequence(s, t);
-        assert_eq!(res, true);
+        assert!(res);
     }
 }

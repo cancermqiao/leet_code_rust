@@ -188,12 +188,12 @@ impl Solution {
                 res += divisor;
             }
             if quotient > 1 {
-                if divisor < dividend - divisor {
+                if divisor < dividend.wrapping_sub(divisor) {
                     return false;
                 }
                 divisor += divisor;
             }
-            quotient = quotient >> 1;
+            quotient >>= 1;
         }
         true
     }
@@ -260,7 +260,7 @@ mod tests {
     fn is_valid() {
         let s = "()".to_string();
         let res = Solution::is_valid(s);
-        assert_eq!(res, true);
+        assert!(res);
     }
 
     /// 21. 合并两个有序链表
@@ -271,7 +271,7 @@ mod tests {
         let list1 = List::new(&l1);
         let list2 = List::new(&l2);
         let res = Solution::merge_two_lists(list1.head, list2.head);
-        let vectors = List { head: res }.to_vec();
+        let vectors = List { head: res }.as_vec();
         assert_eq!(vectors, vec![1, 1, 2, 3, 4, 4]);
     }
 
@@ -290,7 +290,7 @@ mod tests {
         let lists: Vec<Option<Box<ListNode<i32>>>> =
             vals.iter().map(|x| List::new(x).head).collect();
         let res = Solution::merge_k_lists(lists);
-        let vectors = List { head: res }.to_vec();
+        let vectors = List { head: res }.as_vec();
         assert_eq!(vectors, vec![1, 1, 2, 3, 4, 4, 5, 6]);
     }
 
@@ -300,7 +300,7 @@ mod tests {
         let vals = vec![1, 2, 3, 4];
         let head = List::new(&vals);
         let res = Solution::swap_pairs(head.head);
-        let vectors = List { head: res }.to_vec();
+        let vectors = List { head: res }.as_vec();
         assert_eq!(vectors, vec![2, 1, 4, 3]);
     }
 
@@ -311,7 +311,7 @@ mod tests {
         let head = List::new(&vals);
         let k = 2;
         let res = Solution::reverse_k_group(head.head, k);
-        let vectors = List { head: res }.to_vec();
+        let vectors = List { head: res }.as_vec();
         assert_eq!(vectors, vec![2, 1, 4, 3, 5]);
     }
 

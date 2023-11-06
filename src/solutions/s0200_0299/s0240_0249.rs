@@ -27,6 +27,6 @@ mod tests {
         let s = "anagram".to_string();
         let t = "nagaram".to_string();
         let res = Solution::is_anagram(s, t);
-        assert_eq!(res, true);
+        assert!(res);
     }
 }

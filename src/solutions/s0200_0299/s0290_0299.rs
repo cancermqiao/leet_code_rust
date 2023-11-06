@@ -10,9 +10,8 @@ impl Solution {
         }
         let mut c2w = std::collections::HashMap::new();
         let mut w2c = std::collections::HashMap::new();
-        for i in 0..pattern.len() {
+        for (i, &word) in words.iter().take(pattern.len()).enumerate() {
             let c = pattern.chars().nth(i).unwrap();
-            let word = words[i];
             if let Some(&v) = c2w.get(&c) {
                 if v != word {
                     return false;
@@ -42,6 +41,6 @@ mod tests {
         let pattern = "abba".to_string();
         let s = "dog cat cat dog".to_string();
         let res = Solution::word_pattern(pattern, s);
-        assert_eq!(res, true);
+        assert!(res);
     }
 }

@@ -16,7 +16,7 @@ impl Solution {
         if pos == freq.len() {
             return;
         }
-        Self::backtrace(&freq, target, buf, res, pos + 1);
+        Self::backtrace(freq, target, buf, res, pos + 1);
         let cnt = (target / freq[pos].0).min(freq[pos].1 as i32);
         for i in 1..=cnt {
             buf.push(freq[pos].0);
@@ -56,13 +56,13 @@ impl Solution {
             .map(|&x| if x <= 0 { n as i32 + 1 } else { x })
             .collect();
         for i in 0..n {
-            let num_abs = nums[i].abs() as usize;
+            let num_abs = nums[i].unsigned_abs() as usize;
             if num_abs <= n {
-                nums[num_abs - 1] = -nums[num_abs - 1].abs();
+                nums[num_abs - 1] = -nums[num_abs-1].abs();
             }
         }
-        for i in 0..n {
-            if nums[i] > 0 {
+        for (i, &v) in nums.iter().enumerate() {
+            if v > 0 {
                 return i as i32 + 1;
             }
         }
@@ -91,7 +91,7 @@ impl Solution {
     /// 43. 字符串相乘
     #[allow(dead_code)]
     pub fn multiply(num1: String, num2: String) -> String {
-        if num1 == "0".to_string() || num2 == "0".to_string() {
+        if num1 == *"0" || num2 == *"0" {
             return "0".to_string();
         }
         let (m, n) = (num1.len(), num2.len());
@@ -106,7 +106,7 @@ impl Solution {
         }
         for i in (1..m + n).rev() {
             res[i - 1] += res[i] / 10;
-            res[i] = res[i] % 10;
+            res[i] %= 10;
         }
         if res[0] == 0 {
             res.remove(0);
@@ -190,7 +190,7 @@ impl Solution {
                 end = max_pos;
             }
         }
-        return step;
+        step
     }
 
     /// 46. 全排列
@@ -324,9 +324,9 @@ mod tests {
         let s = "aa";
         let p = "*";
         let res = Solution::is_match(s.to_string(), p.to_string(), "recursion");
-        assert_eq!(res, true);
+        assert!(res);
         let res = Solution::is_match(s.to_string(), p.to_string(), "dynamic");
-        assert_eq!(res, true);
+        assert!(res);
     }
 
     /// 45. 跳跃游戏 II

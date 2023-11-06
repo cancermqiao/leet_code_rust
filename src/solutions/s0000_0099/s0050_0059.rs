@@ -90,7 +90,7 @@ impl Solution {
     ) {
         let n = cols.len();
         if row == n {
-            *res = *res + 1;
+            *res += 1;
         } else {
             for i in 0..n {
                 if cols[i] && diagonal1[row + i] && diagonal2[row + n - i - 1] {
@@ -355,11 +355,11 @@ mod tests {
     fn can_jump() {
         let nums = vec![2, 3, 1, 1, 4];
         let res = Solution::can_jump(nums);
-        assert_eq!(res, true);
+        assert!(res);
 
         let nums = vec![3, 2, 1, 0, 4];
         let res = Solution::can_jump(nums);
-        assert_eq!(res, false);
+        assert!(!res);
     }
 
     /// 56. 合并区间

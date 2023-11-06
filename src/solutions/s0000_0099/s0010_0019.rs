@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{cmp::Ordering, collections::HashMap};
 
 use crate::data::list::ListNode;
 
@@ -13,11 +13,11 @@ impl Solution {
             ([], _) => s.is_empty(),
             ([a, b'*', ..], _) => {
                 Self::is_match_recursion(s, &p[2..])
-                    || (s.len() > 0
+                    || (!s.is_empty()
                         && (*a == b'.' || *a == s[0])
                         && Self::is_match_recursion(&s[1..], &p[1..]))
             }
-            ([b'.', ..], _) => s.len() > 0 && Self::is_match_recursion(&s[1..], &p[1..]),
+            ([b'.', ..], _) => !s.is_empty() && Self::is_match_recursion(&s[1..], &p[1..]),
             ([a, ..], [b, ..]) => a == b && Self::is_match_recursion(&s[1..], &p[1..]),
             _ => false,
         }
@@ -44,10 +44,8 @@ impl Solution {
                     if matches(i, j - 1) {
                         dp[i][j] |= dp[i - 1][j];
                     }
-                } else {
-                    if matches(i, j) {
-                        dp[i][j] |= dp[i - 1][j - 1];
-                    }
+                } else if matches(i, j) {
+                    dp[i][j] |= dp[i - 1][j - 1];
                 }
             }
         }
@@ -161,20 +159,20 @@ impl Solution {
             let (mut left, mut right) = (i + 1, nums.len() - 1);
             while left < right {
                 let sum = nums[i] + nums[left] + nums[right];
-                if sum > 0 {
-                    right -= 1;
-                } else if sum < 0 {
-                    left += 1;
-                } else {
-                    res.push(vec![nums[i], nums[left], nums[right]]);
-                    while left < right && nums[left] == nums[left + 1] {
+                match sum.cmp(&0) {
+                    Ordering::Greater => right -= 1,
+                    Ordering::Less => left += 1,
+                    Ordering::Equal => {
+                        res.push(vec![nums[i], nums[left], nums[right]]);
+                        while left < right && nums[left] == nums[left + 1] {
+                            left += 1;
+                        }
+                        while left < right && nums[right] == nums[right - 1] {
+                            right -= 1;
+                        }
                         left += 1;
-                    }
-                    while left < right && nums[right] == nums[right - 1] {
                         right -= 1;
                     }
-                    left += 1;
-                    right -= 1;
                 }
             }
         }
@@ -193,12 +191,10 @@ impl Solution {
                 if (sum - target).abs() < (res - target).abs() {
                     res = sum;
                 }
-                if sum == target {
-                    return sum;
-                } else if sum < target {
-                    l += 1;
-                } else {
-                    r -= 1;
+                match sum.cmp(&target) {
+                    Ordering::Equal => return sum,
+                    Ordering::Greater => r -= 1,
+                    Ordering::Less => l += 1,
                 }
             }
         }
@@ -206,7 +202,7 @@ impl Solution {
     }
 
     /// 17. 电话号码的字母组合
-    /// 
+    ///
     /// # 深度优先搜索
     fn dfs(s: &[u8], map: &HashMap<u8, &str>, buf: &mut String, res: &mut Vec<String>) {
         if s.is_empty() {
@@ -219,7 +215,7 @@ impl Solution {
             }
         }
     }
-    
+
     /// # 广度优先搜索
     fn bfs(s: &[u8], map: HashMap<u8, &str>, res: &mut Vec<String>) {
         res.push("".to_string());
@@ -227,7 +223,7 @@ impl Solution {
             for _ in 0..res.len() {
                 let head = res.pop().unwrap();
                 for c in map.get(key).unwrap().chars() {
-                    res.insert(0, format!("{}{}", head, c.to_string()));
+                    res.insert(0, format!("{}{}", head, c));
                 }
             }
         }
@@ -250,9 +246,9 @@ impl Solution {
             return res;
         }
         match method_type {
-            "dfs" => Self::dfs(&digits.as_bytes(), &map, &mut buf, &mut res),
-            "bfs" => Self::bfs(&digits.as_bytes(), map, &mut res),
-            _ => Self::dfs(&digits.as_bytes(), &map, &mut buf, &mut res)
+            "dfs" => Self::dfs(digits.as_bytes(), &map, &mut buf, &mut res),
+            "bfs" => Self::bfs(digits.as_bytes(), map, &mut res),
+            _ => Self::dfs(digits.as_bytes(), &map, &mut buf, &mut res),
         }
         res
     }
@@ -298,20 +294,20 @@ impl Solution {
                 let (mut l, mut r) = (j + 1, n - 1);
                 while l < r {
                     let sum = nums[i] as i64 + nums[j] as i64 + nums[l] as i64 + nums[r] as i64;
-                    if sum == target {
-                        res.push(vec![nums[i], nums[j], nums[l], nums[r]]);
-                        while l < r && nums[l] == nums[l + 1] {
+                    match sum.cmp(&target) {
+                        Ordering::Equal => {
+                            res.push(vec![nums[i], nums[j], nums[l], nums[r]]);
+                            while l < r && nums[l] == nums[l + 1] {
+                                l += 1;
+                            }
                             l += 1;
-                        }
-                        l += 1;
-                        while l < r && nums[r] == nums[r - 1] {
+                            while l < r && nums[r] == nums[r - 1] {
+                                r -= 1;
+                            }
                             r -= 1;
                         }
-                        r -= 1;
-                    } else if sum > target {
-                        r -= 1;
-                    } else {
-                        l += 1;
+                        Ordering::Greater => r -= 1,
+                        Ordering::Less => l += 1,
                     }
                 }
             }
@@ -321,7 +317,10 @@ impl Solution {
 
     /// 19. 删除链表的倒数第 N 个结点
     #[allow(dead_code)]
-    pub fn remove_nth_from_end(head: Option<Box<ListNode<i32>>>, n: i32) -> Option<Box<ListNode<i32>>> {
+    pub fn remove_nth_from_end(
+        head: Option<Box<ListNode<i32>>>,
+        n: i32,
+    ) -> Option<Box<ListNode<i32>>> {
         let mut dummy = Some(Box::new(ListNode { val: 0, next: head }));
         let mut slow_head = &mut dummy;
         let mut fast_head = &slow_head.clone();
@@ -335,7 +334,7 @@ impl Solution {
         while fast_head.is_some() {
             fast_head = &fast_head.as_ref().unwrap().next;
             slow_head = &mut slow_head.as_mut().unwrap().next;
-        }        
+        }
         let remove_node = &mut slow_head.as_mut().unwrap().next;
         slow_head.as_mut().unwrap().next = remove_node.as_mut().unwrap().next.take();
         dummy.unwrap().next
@@ -354,9 +353,9 @@ mod tests {
         let s = "aa";
         let p = "a";
         let res = Solution::is_match(s.to_string(), p.to_string(), "recursion");
-        assert_eq!(res, false);
+        assert!(!res);
         let res = Solution::is_match(s.to_string(), p.to_string(), "dynamic");
-        assert_eq!(res, false);
+        assert!(!res);
     }
 
     /// 11. 盛最多水的容器
@@ -444,11 +443,11 @@ mod tests {
     /// 19. 删除链表的倒数第 N 个结点
     #[test]
     fn remove_nth_from_end() {
-        let vals = vec![1,2,3,4,5]; 
+        let vals = vec![1, 2, 3, 4, 5];
         let head = List::new(&vals);
         let n = 2;
         let res = Solution::remove_nth_from_end(head.head, n);
-        let vectors = List { head: res }.to_vec();
+        let vectors = List { head: res }.as_vec();
         assert_eq!(vectors, vec![1, 2, 3, 5]);
     }
 }

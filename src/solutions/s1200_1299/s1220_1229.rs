@@ -1,14 +1,14 @@
+use std::cmp::Ordering;
+
 pub struct Solution {}
 
 impl Solution {
     /// 1222. 可以攻击国王的皇后
     fn key(x: i32) -> i32 {
-        if x > 0 {
-            1
-        } else if x < 0 {
-            -1
-        } else {
-            0
+        match x.cmp(&0) {
+            Ordering::Equal => 0,
+            Ordering::Greater => 1,
+            Ordering::Less => -1,
         }
     }
 

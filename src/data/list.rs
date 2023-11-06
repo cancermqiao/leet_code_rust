@@ -44,7 +44,7 @@ where
     /// 向链表的头部插入节点
     pub fn push(&mut self, val: T) {
         let new_node = Box::new(ListNode {
-            val: val,
+            val,
             next: self.head.take(),
         });
         self.head = Some(new_node);
@@ -60,7 +60,7 @@ where
     }
 
     #[allow(dead_code)]
-    pub fn to_vec(&mut self) -> Vec<T> {
+    pub fn as_vec(&mut self) -> Vec<T> {
         let mut vectors = Vec::new();
         while let Some(val) = self.pop() {
             vectors.push(val);
@@ -89,7 +89,7 @@ mod tests {
         list.push(4);
         let val = list.pop().unwrap();
         assert_eq!(val, 4);
-        let vectors = list.to_vec();
+        let vectors = list.as_vec();
         assert_eq!(vectors, vals);
     }
 }

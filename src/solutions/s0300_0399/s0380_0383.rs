@@ -29,6 +29,6 @@ mod tests {
         let ransom_note = "a".to_string();
         let magazine = "b".to_string();
         let res = Solution::can_construct(ransom_note, magazine);
-        assert_eq!(res, false);
+        assert!(!res);
     }
 }

@@ -36,6 +36,6 @@ mod tests {
         let s2 = "dbbca".to_string();
         let s3 = "aadbbcbcac".to_string();
         let res = Solution::is_interleave(s1, s2, s3);
-        assert_eq!(res, true);
+        assert!(res);
     }
 }

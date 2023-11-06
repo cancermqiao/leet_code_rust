@@ -125,7 +125,7 @@ mod tests {
     fn is_palindrome() {
         let s = "A man, a plan, a canal: Panama".to_string();
         let res = Solution::is_palindrome(s);
-        assert_eq!(res, true);
+        assert!(res);
     }
 
     /// 128. 最长连续序列

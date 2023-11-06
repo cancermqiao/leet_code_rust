@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 pub struct Solution {}
 
 impl Solution {
@@ -12,17 +14,17 @@ impl Solution {
             let (mut left, mut right) = (0, i as i32 - 1);
             while left <= right {
                 let mult = arr[left as usize] * arr[right as usize];
-                if mult == arr[i] {
-                    dp[i] +=
-                        (dp[left as usize] * dp[right as usize] * (1 + (left != right) as i64))
-                            % mod_num;
-                    dp[i] %= mod_num;
-                    left += 1;
-                    right -= 1;
-                } else if mult > arr[i] {
-                    right -= 1;
-                } else {
-                    left += 1;
+                match mult.cmp(&arr[i]) {
+                    Ordering::Equal => {
+                        dp[i] +=
+                            (dp[left as usize] * dp[right as usize] * (1 + (left != right) as i64))
+                                % mod_num;
+                        dp[i] %= mod_num;
+                        left += 1;
+                        right -= 1;
+                    }
+                    Ordering::Greater => right -= 1,
+                    Ordering::Less => left += 1,
                 }
             }
         }

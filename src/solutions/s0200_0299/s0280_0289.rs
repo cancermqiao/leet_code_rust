@@ -22,8 +22,8 @@ impl Solution {
     #[allow(dead_code)]
     pub fn game_of_life(board: &mut Vec<Vec<i32>>) {
         let (nr, nc) = (board.len() as i32, board[0].len() as i32);
-        for r in 0..nr as i32 {
-            for c in 0..nc as i32 {
+        for r in 0..nr {
+            for c in 0..nc {
                 let mut live_num = 0;
                 for i in -1..2 {
                     for j in -1..2 {
@@ -33,7 +33,7 @@ impl Solution {
                         {
                             continue;
                         }
-                        if board[(r+i) as usize][(c+j) as usize] > 0 {
+                        if board[(r + i) as usize][(c + j) as usize] > 0 {
                             live_num += 1;
                         }
                     }
@@ -46,16 +46,16 @@ impl Solution {
                 }
             }
         }
-        for r in 0..nr as usize {
-            for c in 0..nc as usize {
-                if board[r][c] == 2 {
-                    board[r][c] = 0;
+        board.iter_mut().take(nr as usize).for_each(|v| {
+            v.iter_mut().take(nc as usize).for_each(|x| {
+                if *x == 2 {
+                    *x = 0;
                 }
-                if board[r][c] == -1 {
-                    board[r][c] = 1;
+                if *x == -1 {
+                    *x = 1;
                 }
-            }
-        }
+            })
+        });
     }
 }
 

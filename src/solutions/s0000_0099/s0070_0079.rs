@@ -7,7 +7,7 @@ impl Solution {
         let (mut pre, mut prepre) = (1, 0);
         for _ in 0..n {
             let tmp = pre;
-            pre = pre + prepre;
+            pre += prepre;
             prepre = tmp;
         }
         pre
@@ -29,27 +29,22 @@ impl Solution {
         }
         for j in 1..nc {
             if matrix[0][j] == 0 {
-                for i in 1..nr {
-                    matrix[i][j] = 0;
-                }
+                matrix.iter_mut().take(nr).skip(1).for_each(|v| v[j] = 0);
             }
         }
-        for i in 1..nr {
-            if matrix[i][0] == 0 {
-                for j in 1..nc {
-                    matrix[i][j] = 0;
-                }
+        matrix.iter_mut().take(nr).skip(1).for_each(|v| {
+            if v[0] == 0 {
+                *v = vec![0; nc];
             }
-        }
+        });
+
         if first_row {
             for j in 0..nc {
                 matrix[0][j] = 0;
             }
         }
         if first_col {
-            for i in 0..nr {
-                matrix[i][0] = 0;
-            }
+            matrix.iter_mut().for_each(|v| v[0] = 0);
         }
     }
 }

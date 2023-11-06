@@ -12,8 +12,7 @@ impl Solution {
                     num_islands += 1;
                     grid[i as usize][j as usize] = '0';
                     let mut stack = vec![(i, j)];
-                    while !stack.is_empty() {
-                        let (x, y) = stack.pop().unwrap();
+                    while let Some((x, y)) = stack.pop() {
                         for (x, y) in [(x + 1, y), (x - 1, y), (x, y - 1), (x, y + 1)] {
                             if x >= 0
                                 && x < nr
@@ -39,7 +38,7 @@ impl Solution {
             let mut res = 0;
             while num > 0 {
                 res += (num % 10).pow(2);
-                num = num / 10;
+                num /= 10;
             }
             res
         };
@@ -93,7 +92,7 @@ impl Solution {
         if res == target + 1 {
             0
         } else {
-            res as i32
+            res
         }
     }
 }
@@ -120,7 +119,7 @@ mod tests {
     fn is_happy() {
         let n = 19;
         let res = Solution::is_happy(n);
-        assert_eq!(res, true);
+        assert!(res);
     }
 
     /// 205. 同构字符串
@@ -129,7 +128,7 @@ mod tests {
         let s = "egg".to_string();
         let t = "add".to_string();
         let res = Solution::is_isomorphic(s, t);
-        assert_eq!(res, true);
+        assert!(res);
     }
 
     /// 209. 长度最小的子数组

@@ -6,14 +6,14 @@ impl Solution {
     pub fn solve(board: &mut Vec<Vec<char>>) {
         let (nr, nc) = (board.len(), board[0].len());
         let mut stack = Vec::new();
-        for i in 0..nr {
-            if board[i][0] == 'O' {
+        for (i, v) in board.iter_mut().enumerate() {
+            if v[0] == 'O' {
                 stack.push((i, 0));
-                board[i][0] = 'A';
+                v[0] = 'A';
             }
-            if board[i][nc - 1] == 'O' {
+            if v[nc - 1] == 'O' {
                 stack.push((i, nc - 1));
-                board[i][nc - 1] = 'A';
+                v[nc - 1] = 'A';
             }
         }
         for j in 1..nc {
@@ -26,8 +26,7 @@ impl Solution {
                 board[nr - 1][j] = 'A';
             }
         }
-        while !stack.is_empty() {
-            let (x, y) = stack.pop().unwrap();
+        while let Some((x, y)) = stack.pop() {
             for (nx, ny) in [
                 (x as i32 + 1, y as i32),
                 (x as i32 - 1, y as i32),
@@ -45,15 +44,15 @@ impl Solution {
                 }
             }
         }
-        for i in 0..nr {
-            for j in 0..nc {
-                if board[i][j] == 'A' {
-                    board[i][j] = 'O';
-                } else if board[i][j] == 'O' {
-                    board[i][j] = 'X';
+        board.iter_mut().for_each(|v| {
+            v.iter_mut().for_each(|x| {
+                if *x == 'A' {
+                    *x = 'O'
+                } else if *x == 'O' {
+                    *x = 'X'
                 }
-            }
-        }
+            })
+        });
     }
 
     /// 134. 加油站
@@ -211,6 +210,6 @@ mod tests {
         let s = "leetcode".to_string();
         let word_dict = vec!["leet".to_string(), "code".to_string()];
         let res = Solution::word_break(s, word_dict);
-        assert_eq!(res, true);
+        assert!(res);
     }
 }

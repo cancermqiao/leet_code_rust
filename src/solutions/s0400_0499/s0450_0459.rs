@@ -4,7 +4,7 @@ impl Solution {
     /// 452. 用最少数量的箭引爆气球
     #[allow(dead_code)]
     pub fn find_min_arrow_shots(mut points: Vec<Vec<i32>>) -> i32 {
-        if points.len() == 0 {
+        if points.is_empty() {
             return 0;
         }
         points.sort();

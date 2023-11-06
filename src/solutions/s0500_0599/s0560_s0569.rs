@@ -7,12 +7,12 @@ impl Solution {
         let mut res = 0;
         for i in 0..nums.len() {
             let mut sum = 0;
-            for j in i..nums.len() {
-                sum += nums[j];
+            nums.iter().skip(i).for_each(|x| {
+                sum += x;
                 if sum == k {
                     res += 1;
                 }
-            }
+            });
         }
         res
     }
@@ -25,7 +25,7 @@ mod tests {
     /// 560. 和为k的子数组
     #[test]
     fn subarray_sum() {
-        let nums = vec![1,1,1];
+        let nums = vec![1, 1, 1];
         let k = 2;
         let res = Solution::subarray_sum(nums, k);
         assert_eq!(res, 2);

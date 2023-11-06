@@ -1,9 +1,9 @@
 use crate::data::list::ListNode;
 
-enum STATE {
-    BLANK,
-    SIGN,
-    BEGIN,
+enum State {
+    Blank,
+    Sign,
+    Begin,
 }
 
 pub struct Solution {}
@@ -152,7 +152,7 @@ impl Solution {
         let (mut i, mut direction) = (0, -1);
         for c in s.chars() {
             res.get_mut(i as usize).unwrap().push(c);
-            if i == 0 || i == num_rows as i32 - 1 {
+            if i == 0 || i == num_rows - 1 {
                 direction = -direction;
             }
             i += direction;
@@ -165,11 +165,11 @@ impl Solution {
     pub fn reverse(mut x: i32) -> i32 {
         let mut res = 0;
         while x != 0 {
-            if res > i32::MAX/10 || res < i32::MIN/10 {
+            if !(i32::MIN / 10..=i32::MAX / 10).contains(&res) {
                 return 0;
             }
             res = res * 10 + x % 10;
-            x = x / 10;
+            x /= 10;
         }
         res
     }
@@ -177,28 +177,28 @@ impl Solution {
     /// 8. 字符串转换整数（atoi）
     #[allow(dead_code)]
     pub fn my_atoi(s: String) -> i32 {
-        let mut state = STATE::BLANK;
+        let mut state = State::Blank;
         let mut res = 0_i64;
         let mut sign = 1;
         for c in s.chars() {
             match state {
-                STATE::BLANK => {
+                State::Blank => {
                     if c == ' ' {
                         continue;
                     } else if c == '-' {
-                        state = STATE::SIGN;
+                        state = State::Sign;
                         sign = -1;
                     } else if c == '+' {
-                        state = STATE::SIGN;
+                        state = State::Sign;
                         sign = 1;
                     } else if c.is_ascii_digit() {
                         res = res * 10 + c.to_digit(10).unwrap() as i64;
-                        state = STATE::BEGIN;
+                        state = State::Begin;
                     } else {
                         break;
                     }
                 }
-                STATE::SIGN | STATE::BEGIN => {
+                State::Sign | State::Begin => {
                     if c.is_ascii_digit() {
                         res = res * 10 + c.to_digit(10).unwrap() as i64;
                         if sign == 1 {
@@ -261,7 +261,7 @@ mod tests {
         let res = List {
             head: Solution::add_two_numbers(l1, l2),
         }
-        .to_vec();
+        .as_vec();
         assert_eq!(res, vec![7, 0, 8]);
     }
 
@@ -320,6 +320,6 @@ mod tests {
     fn is_palindrome() {
         let x = 121;
         let res = Solution::is_palindrome(x);
-        assert_eq!(res, true);
+        assert!(res);
     }
 }

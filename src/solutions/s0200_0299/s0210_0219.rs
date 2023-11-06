@@ -1,14 +1,17 @@
+use std::cmp::Ordering;
+
 pub struct Solution {}
 
 impl Solution {
     /// 213. 打家劫舍 II
     fn rob_range(nums: &Vec<i32>, l: usize, r: usize) -> i32 {
         let (mut pre, mut cur) = (0, 0);
-        for i in l..=r {
+        nums.iter().take(r + 1).skip(l).for_each(|x| {
             let tmp = cur;
-            cur = pre + nums[i];
+            cur = pre + x;
             pre = pre.max(tmp);
-        }
+        });
+
         pre.max(cur)
     }
 
@@ -16,9 +19,9 @@ impl Solution {
     pub fn rob(nums: Vec<i32>) -> i32 {
         let n = nums.len();
         if n == 1 {
-            return nums[0];
+            nums[0]
         } else if n == 2 {
-            return nums[0].max(nums[1]);
+            nums[0].max(nums[1])
         } else {
             Self::rob_range(&nums, 0, n - 2).max(Self::rob_range(&nums, 1, n - 1))
         }
@@ -43,12 +46,10 @@ impl Solution {
             }
             nums.swap(i, pivot);
 
-            if i as i32 + 1 == k {
-                nums[i]
-            } else if i as i32 + 1 > k {
-                helper(nums, l, i - 1, k)
-            } else {
-                helper(nums, i + 1, r, k)
+            match (i as i32 + 1).cmp(&k) {
+                Ordering::Equal => nums[i],
+                Ordering::Greater => helper(nums, l, i - 1, k),
+                Ordering::Less => helper(nums, i + 1, r, k),
             }
         }
         let n = nums.len();
@@ -98,6 +99,6 @@ mod tests {
         let nums = vec![1, 2, 3, 1];
         let k = 3;
         let res = Solution::contains_nearby_duplicate(nums, k);
-        assert_eq!(res, true);
+        assert!(res);
     }
 }

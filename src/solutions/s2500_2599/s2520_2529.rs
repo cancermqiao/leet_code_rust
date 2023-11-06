@@ -6,7 +6,7 @@ impl Solution {
     pub fn categorize_box(length: i32, width: i32, height: i32, mass: i32) -> String {
         let max_length = length.max(width).max(height);
         let vol = length as i64 * width as i64 * height as i64;
-        let is_bulky = max_length >= 10000 || vol >= 1000_000_000;
+        let is_bulky = max_length >= 10000 || vol >= 1_000_000_000;
         let is_heavy = mass >= 100;
         match (is_bulky, is_heavy) {
             (true, false) => "Bulky",

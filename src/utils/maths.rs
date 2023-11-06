@@ -1,5 +1,5 @@
 /// 欧几里得算法求最大公约数
-/// 
+///
 /// # Example
 /// ```
 /// use leet_code_rust::utils::maths::gcd;
@@ -8,18 +8,18 @@
 /// ```
 pub fn gcd(a: i32, b: i32) -> i32 {
     if a == 0 {
-        return b;
+        b
     } else if b == 0 {
-        return a;
+        a
     } else if a > b {
-        return gcd(a % b, b);
+        gcd(a % b, b)
     } else {
-        return gcd(b % a, a);
+        gcd(b % a, a)
     }
 }
 
 /// 最小公倍数
-/// 
+///
 /// # Example
 /// ```
 /// use leet_code_rust::utils::maths::lcm;

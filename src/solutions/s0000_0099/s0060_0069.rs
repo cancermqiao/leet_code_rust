@@ -6,9 +6,9 @@ impl Solution {
     /// 60. 排列序列
     #[allow(dead_code)]
     pub fn get_permutation(n: i32, mut k: i32) -> String {
-        let mut nums: Vec<String> = (1..=n as i32).map(|x| x.to_string()).collect();
+        let mut nums: Vec<String> = (1..=n).map(|x| x.to_string()).collect();
         let (mut cnts, mut multi) = (Vec::new(), 1);
-        for i in 1..n as i32 {
+        for i in 1..n {
             multi *= i;
             cnts.push(multi);
         }
@@ -231,7 +231,7 @@ mod tests {
         let k = 2;
         let head = List::new(&vals);
         let res = Solution::rotate_right(head.head, k);
-        let vectors = List { head: res }.to_vec();
+        let vectors = List { head: res }.as_vec();
         assert_eq!(vectors, vec![4, 5, 1, 2, 3]);
     }
 

@@ -18,7 +18,7 @@ impl Solution {
                 count.insert(word, count.get(word).unwrap_or(&0) + 1);
             }
             for word in &words {
-                let _ = match count.get(word.as_str()) {
+                match count.get(word.as_str()) {
                     None => count.insert(word, -1),
                     Some(1) => count.remove(word.as_str()),
                     Some(a) => count.insert(word, a - 1),
@@ -27,19 +27,19 @@ impl Solution {
             for start in (i..(ls - m * n + 1)).step_by(m) {
                 if start != i {
                     let word = &s[start + (n - 1) * m..start + n * m];
-                    let _ = match count.get(word) {
+                    match count.get(word) {
                         None => count.insert(word, 1),
                         Some(-1) => count.remove(word),
                         Some(a) => count.insert(word, a + 1),
                     };
                     let word = &s[start - m..start];
-                    let _ = match count.get(word) {
+                    match count.get(word) {
                         None => count.insert(word, -1),
                         Some(1) => count.remove(word),
                         Some(a) => count.insert(word, a - 1),
                     };
                 }
-                if count.len() == 0 {
+                if count.is_empty() {
                     res.push(start as i32);
                 }
             }
@@ -56,10 +56,10 @@ impl Solution {
         }
         if i >= 0 {
             let mut j = nums.len() - 1;
-            while nums[i as usize] >= nums[j as usize] {
+            while nums[i as usize] >= nums[j] {
                 j -= 1;
             }
-            nums.swap(i as usize, j as usize);
+            nums.swap(i as usize, j);
         }
         let (mut l, mut r) = (i + 1, nums.len() as i32 - 1);
         while l < r {
@@ -74,16 +74,16 @@ impl Solution {
     pub fn longest_valid_parentheses(s: String) -> i32 {
         let s = s.as_bytes();
         let mut res = 0;
-        let mut stack = vec![-1];
-        for i in 0..s.len() {
-            if s[i] == b'(' {
-                stack.push(i as i32);
+        let mut stack = vec![0];
+        for (i, &v) in s.iter().enumerate() {
+            if v == b'(' {
+                stack.push(i + 1);
             } else {
                 stack.pop();
                 if stack.is_empty() {
-                    stack.push(i as i32);
+                    stack.push(i + 1);
                 } else {
-                    res = res.max(i as i32 - stack.last().unwrap());
+                    res = res.max(i + 1 - stack.last().unwrap());
                 }
             }
         }
@@ -105,12 +105,10 @@ impl Solution {
                 } else {
                     r = p - 1;
                 }
+            } else if target < nums[p] && nums[l] <= target {
+                r = p - 1;
             } else {
-                if target < nums[p] && nums[l] <= target {
-                    r = p - 1;
-                } else {
-                    l = p + 1;
-                }
+                l = p + 1;
             }
         }
         -1
@@ -152,16 +150,16 @@ impl Solution {
     /// 35. 搜索插入位置
     #[allow(dead_code)]
     pub fn search_insert(nums: Vec<i32>, target: i32) -> i32 {
-        let (mut l, mut r) = (0 as i32, nums.len() as i32 - 1);
+        let (mut l, mut r) = (0_i32, nums.len() as i32 - 1);
         while l <= r {
             let p = (l + r) / 2;
             match nums[p as usize].cmp(&target) {
-                std::cmp::Ordering::Equal => return p as i32,
+                std::cmp::Ordering::Equal => return p,
                 std::cmp::Ordering::Less => l = p + 1,
                 std::cmp::Ordering::Greater => r = p - 1,
             }
         }
-        l as i32
+        l
     }
 
     /// 36. 有效的数独
@@ -411,7 +409,7 @@ mod tests {
             vec!['.', '.', '.', '.', '8', '.', '.', '7', '9'],
         ];
         let res = Solution::is_valid_sudoku(board);
-        assert_eq!(res, true);
+        assert!(res);
     }
 
     /// 37. 解数独
