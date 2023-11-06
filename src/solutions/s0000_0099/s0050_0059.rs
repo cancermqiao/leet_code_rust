@@ -266,10 +266,10 @@ impl Solution {
             }
 
             // DOWN
-            for i in top + 1..=bottom {
-                res[i][right] = num;
+            res.iter_mut().take(bottom + 1).skip(top + 1).for_each(|v| {
+                v[right] = num;
                 num += 1;
-            }
+            });
 
             // LEFT
             if top < bottom {
