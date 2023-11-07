@@ -1,4 +1,135 @@
+use std::cmp::Ordering;
+
 use crate::data::list::ListNode;
+
+trait IsNumber {
+    fn is_point(&self) -> bool;
+
+    fn is_sign(&self) -> bool;
+
+    fn is_exp(&self) -> bool;
+}
+
+impl IsNumber for char {
+    fn is_point(&self) -> bool {
+        matches!(*self, '.')
+    }
+
+    fn is_sign(&self) -> bool {
+        matches!(*self, '+' | '-')
+    }
+
+    fn is_exp(&self) -> bool {
+        matches!(*self, 'e' | 'E')
+    }
+}
+
+enum State {
+    Initial,
+    IntSign,
+    Integer,
+    Point,
+    PointWithoutInt,
+    Fraction,
+    Exp,
+    ExpSign,
+    ExpNumber,
+    NotNumber,
+}
+
+impl State {
+    fn is_accept(&self) -> bool {
+        matches!(
+            *self,
+            Self::Integer | Self::Point | Self::Fraction | Self::ExpNumber
+        )
+    }
+
+    fn trans(&mut self, c: char) {
+        *self = match &self {
+            Self::Initial => {
+                if c.is_sign() {
+                    Self::IntSign
+                } else if c.is_ascii_digit() {
+                    Self::Integer
+                } else if c.is_point() {
+                    Self::PointWithoutInt
+                } else {
+                    Self::NotNumber
+                }
+            }
+            Self::IntSign => {
+                if c.is_ascii_digit() {
+                    Self::Integer
+                } else if c.is_point() {
+                    Self::PointWithoutInt
+                } else {
+                    Self::NotNumber
+                }
+            }
+            Self::Integer => {
+                if c.is_ascii_digit() {
+                    Self::Integer
+                } else if c.is_point() {
+                    Self::Point
+                } else if c.is_exp() {
+                    Self::Exp
+                } else {
+                    Self::NotNumber
+                }
+            }
+            Self::Point => {
+                if c.is_ascii_digit() {
+                    Self::Fraction
+                } else if c.is_exp() {
+                    Self::Exp
+                } else {
+                    Self::NotNumber
+                }
+            }
+            Self::PointWithoutInt => {
+                if c.is_ascii_digit() {
+                    Self::Fraction
+                } else {
+                    Self::NotNumber
+                }
+            }
+            Self::Fraction => {
+                if c.is_ascii_digit() {
+                    Self::Fraction
+                } else if c.is_exp() {
+                    Self::Exp
+                } else {
+                    Self::NotNumber
+                }
+            }
+            Self::Exp => {
+                if c.is_sign() {
+                    Self::ExpSign
+                } else if c.is_ascii_digit() {
+                    Self::ExpNumber
+                } else {
+                    Self::NotNumber
+                }
+            }
+            Self::ExpSign => {
+                if c.is_ascii_digit() {
+                    Self::ExpNumber
+                } else {
+                    Self::NotNumber
+                }
+            }
+            Self::ExpNumber => {
+                if c.is_ascii_digit() {
+                    Self::ExpNumber
+                } else {
+                    Self::NotNumber
+                }
+            }
+            Self::NotNumber => Self::NotNumber,
+        }
+    }
+}
 
 pub struct Solution {}
 
@@ -113,6 +244,19 @@ impl Solution {
         grid[nr - 1][nc - 1]
     }
 
+    /// 65. 有效数字
+    #[allow(dead_code)]
+    pub fn is_number(s: String) -> bool {
+        let mut state = State::Initial;
+        for c in s.chars() {
+            if matches!(state, State::NotNumber) {
+                return false;
+            }
+            state.trans(c)
+        }
+        state.is_accept()
+    }
+
     /// 66. 加一
     #[allow(dead_code)]
     pub fn plus_one(mut digits: Vec<i32>) -> Vec<i32> {
@@ -168,6 +312,73 @@ impl Solution {
                 }
             }
         }
+    }
+
+    /// 68. 文本左右对齐
+    #[allow(dead_code)]
+    pub fn full_justify(words: Vec<String>, max_width: i32) -> Vec<String> {
+        let mut length = -1;
+        let mut cur_words = Vec::new();
+        let mut res = Vec::new();
+        let usize_width = max_width as usize;
+        for word in words {
+            length += word.len() as i32 + 1;
+            match length.cmp(&max_width) {
+                Ordering::Equal => {
+                    cur_words.push(word);
+                    res.push(cur_words.join(" "));
+                    cur_words = Vec::new();
+                    length = -1;
+                }
+                Ordering::Less => {
+                    cur_words.push(word);
+                    continue;
+                }
+                Ordering::Greater => {
+                    let extra_space = max_width - (length - word.len() as i32 - 1);
+                    length = word.len() as i32;
+                    let space_num = cur_words.len() - 1;
+                    let mut cur_line = String::new();
+                    if space_num == 0 {
+                        res.push(format!("{:<usize_width$}", cur_words.first().unwrap()));
+                    } else {
+                        let (space, mut left) = (
+                            extra_space as usize / space_num,
+                            extra_space as usize % space_num,
+                        );
+                        for (i, w) in cur_words.iter().enumerate() {
+                            if i == 0 {
+                                cur_line.push_str(w);
+                            } else {
+                                let spaces = if left > 0 {
+                                    left -= 1;
+                                    vec![" "; space + 2].join("")
+                                } else {
+                                    vec![" "; space + 1].join("")
+                                };
+                                cur_line.push_str(&(spaces + w));
+                            }
+                        }
+                        res.push(cur_line);
+                    }
+                    cur_words = vec![word];
+                }
+            }
+        }
+        if cur_words.is_empty() {
+            if let Some(line) = res.pop() {
+                res.push(
+                    line.split(' ')
+                        .filter(|x| !x.is_empty())
+                        .collect::<Vec<&str>>()
+                        .join(" "),
+                );
+            }
+        } else {
+            let cur_line = cur_words.join(" ");
+            res.push(format!("{:<usize_width$}", cur_line));
+        }
+        res
     }
 
     /// 69. x的平方根
@@ -260,6 +471,33 @@ mod tests {
         assert_eq!(res, 7);
     }
 
+    /// 65. 有效数字
+    #[test]
+    fn is_number() {
+        let number_strs = [
+            "2",
+            "0089",
+            "-0.1",
+            "+3.14",
+            "4.",
+            "-.9",
+            "2e10",
+            "-90E3",
+            "3e+7",
+            "+6e-1",
+            "53.5e93",
+            "-123.456e789",
+        ];
+        for str in number_strs {
+            assert!(Solution::is_number(str.to_string()))
+        }
+
+        let not_number_strs = ["abc", "1a", "1e", "e3", "99e2.5", "--6", "-+3", "95a54e53"];
+        for str in not_number_strs {
+            assert!(!Solution::is_number(str.to_string()))
+        }
+    }
+
     /// 66. 加一
     #[test]
     fn plus_one() {
@@ -275,6 +513,30 @@ mod tests {
         let b = "1".to_string();
         let res = Solution::add_binary(a, b);
         assert_eq!(res, "100".to_string());
+    }
+
+    /// 68. 文本左右对齐
+    #[test]
+    fn full_justify() {
+        let words = vec![
+            "This".to_string(),
+            "is".to_string(),
+            "an".to_string(),
+            "example".to_string(),
+            "of".to_string(),
+            "text".to_string(),
+            "justification.".to_string(),
+        ];
+        let max_width = 16;
+        let res = Solution::full_justify(words, max_width);
+        assert_eq!(
+            res,
+            vec![
+                "This    is    an".to_string(),
+                "example  of text".to_string(),
+                "justification.  ".to_string()
+            ]
+        )
     }
 
     /// 69. x的平方根

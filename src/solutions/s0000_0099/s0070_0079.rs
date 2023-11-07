@@ -13,6 +13,20 @@ impl Solution {
         pre
     }
 
+    /// 71. 简化路径
+    #[allow(dead_code)]
+    pub fn simplify_path(path: String) -> String {
+        let mut res = Vec::new();
+        for item in path.split('/').filter(|e| !e.is_empty()) {
+            if item.eq("..") {
+                res.pop();
+            } else if !item.eq(".") {
+                res.push(item);
+            }
+        }
+        format!("/{}", res.join("/"))
+    }
+
     /// 73. 矩阵置零
     #[allow(dead_code)]
     pub fn set_zeroes(matrix: &mut Vec<Vec<i32>>) {
@@ -59,6 +73,14 @@ mod tests {
         let n = 2;
         let res = Solution::climb_stairs(n);
         assert_eq!(res, 2);
+    }
+
+    /// 71. 简化路径
+    #[test]
+    fn simplify_path() {
+        let path = "/a/./b/../../c/".to_string();
+        let res = Solution::simplify_path(path);
+        assert_eq!(res, "/c".to_string());
     }
 
     /// 73. 矩阵置零
