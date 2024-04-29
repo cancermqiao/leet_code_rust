@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 
-use crate::data::list::ListNode;
+use crate::model::list::ListNode;
 
 trait IsNumber {
     fn is_point(&self) -> bool;
@@ -422,7 +422,7 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
-    use crate::data::list::List;
+    use crate::model::list::List;
 
     use super::*;
 

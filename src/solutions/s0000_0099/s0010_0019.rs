@@ -1,6 +1,6 @@
 use std::{cmp::Ordering, collections::HashMap};
 
-use crate::data::list::ListNode;
+use crate::model::list::ListNode;
 
 pub struct Solution {}
 
@@ -343,7 +343,7 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
-    use crate::data::list::List;
+    use crate::model::list::List;
 
     use super::*;
 

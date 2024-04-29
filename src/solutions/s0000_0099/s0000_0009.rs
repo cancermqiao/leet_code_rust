@@ -1,4 +1,4 @@
-use crate::data::list::ListNode;
+use crate::model::list::ListNode;
 
 enum State {
     Blank,
@@ -238,7 +238,7 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
-    use crate::data::list::List;
+    use crate::model::list::List;
 
     use super::*;
 
