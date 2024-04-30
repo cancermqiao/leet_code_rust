@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 213. 打家劫舍 II

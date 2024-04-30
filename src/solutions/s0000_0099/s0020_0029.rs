@@ -1,6 +1,6 @@
 use crate::model::list::ListNode;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 20. 有效括号

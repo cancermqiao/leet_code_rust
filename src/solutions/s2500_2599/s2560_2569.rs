@@ -1,4 +1,4 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 2560. 打家劫舍 IV

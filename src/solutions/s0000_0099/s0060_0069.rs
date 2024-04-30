@@ -131,7 +131,7 @@ impl State {
     }
 }
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 60. 排列序列

@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 162. 寻找峰值

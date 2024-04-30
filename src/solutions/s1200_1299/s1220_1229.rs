@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 1222. 可以攻击国王的皇后

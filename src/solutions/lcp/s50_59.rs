@@ -1,4 +1,4 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// LCP 50. 宝石补给

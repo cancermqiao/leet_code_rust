@@ -1,4 +1,4 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 2240. 买钢笔和铅笔的方案数

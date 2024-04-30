@@ -1,4 +1,4 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// LCP 06. 拿硬币

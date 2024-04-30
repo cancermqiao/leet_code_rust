@@ -1,4 +1,4 @@
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 200. 岛屿的数量

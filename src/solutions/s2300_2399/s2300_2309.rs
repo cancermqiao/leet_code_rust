@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 2300. 咒语和药水的成功对数

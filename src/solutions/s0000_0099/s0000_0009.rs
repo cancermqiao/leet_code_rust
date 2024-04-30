@@ -6,7 +6,7 @@ enum State {
     Begin,
 }
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 1. 两数之和

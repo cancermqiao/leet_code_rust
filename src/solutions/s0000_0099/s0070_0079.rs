@@ -1,7 +1,7 @@
 use std::cmp::Ordering;
 use std::collections::HashMap;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 70. 爬楼梯

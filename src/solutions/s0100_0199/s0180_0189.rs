@@ -1,6 +1,6 @@
 use crate::utils::maths::gcd;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 189. 轮转数组

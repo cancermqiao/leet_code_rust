@@ -24,7 +24,7 @@ impl Vowel for String {
     }
 }
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 2582. 递枕头

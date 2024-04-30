@@ -2,7 +2,7 @@ use std::{cmp::Ordering, collections::HashMap};
 
 use crate::model::list::ListNode;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 10. 正则表达式匹配

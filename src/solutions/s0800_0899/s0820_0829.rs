@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 823. 带因子的二叉树

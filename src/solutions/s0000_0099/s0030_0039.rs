@@ -1,6 +1,6 @@
 use std::cmp::Ordering::{Equal, Greater, Less};
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 30. 串联所有单词的子串

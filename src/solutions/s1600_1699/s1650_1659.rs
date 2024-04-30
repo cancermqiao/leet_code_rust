@@ -6,7 +6,7 @@ struct JumpInfo {
     step: i32,
 }
 
-pub struct Solution {}
+pub struct Solution;
 
 impl Solution {
     /// 1654. 到家的最小跳跃次数
