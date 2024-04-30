@@ -29,7 +29,7 @@ where
 {
     #[inline]
     #[allow(dead_code)]
-    pub fn new(vals: &Vec<T>) -> Self {
+    pub fn new(vals: &[T]) -> Self {
         if vals.is_empty() {
             List { head: None }
         } else {
