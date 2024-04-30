@@ -4,7 +4,7 @@ pub struct Solution;
 
 impl Solution {
     /// 2300. 咒语和药水的成功对数
-    fn binary_search(potions: &Vec<i32>, spell: i64, success: i64) -> i32 {
+    fn binary_search(potions: &[i32], spell: i64, success: i64) -> i32 {
         let (mut l, mut r) = (0, potions.len() as i32 - 1);
         while l <= r {
             let p = (l + r) / 2;

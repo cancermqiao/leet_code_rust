@@ -270,7 +270,7 @@ impl Solution {
             str.chars().for_each(|c| {
                 count[c as usize - a] += 1;
             });
-            cache.entry(count).or_insert(vec![]).push(str);
+            cache.entry(count).or_default().push(str);
         }
         cache.values().cloned().collect()
     }

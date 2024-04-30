@@ -4,7 +4,7 @@ impl Solution {
     /// 2605. 从两个数字数组里生成最小数字
     #[allow(dead_code)]
     pub fn min_number(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
-        let mut count = vec![0; 9];
+        let mut count = [0; 9];
         for num in nums1 {
             count[num as usize - 1] += 1;
         }

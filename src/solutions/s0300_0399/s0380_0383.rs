@@ -7,7 +7,7 @@ impl Solution {
         if ransom_note.len() > magazine.len() {
             return false
         }
-        let mut chars_nums = vec![0; 26];
+        let mut chars_nums = [0; 26];
         magazine.chars().for_each(|x| chars_nums[x as usize - 'a' as usize] += 1);
         for c in ransom_note.chars() {
             chars_nums[c as usize -'a' as usize ] -= 1;

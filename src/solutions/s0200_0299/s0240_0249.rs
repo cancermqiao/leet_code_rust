@@ -7,7 +7,7 @@ impl Solution {
         if s.len() != t.len() {
             return false;
         }
-        let mut count = vec![0; 26];
+        let mut count = [0; 26];
         let a = 'a' as usize;
         s.chars().zip(t.chars()).for_each(|(s_char, t_char)| {
             count[s_char as usize - a] += 1;

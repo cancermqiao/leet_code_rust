@@ -117,7 +117,7 @@ impl Solution {
     /// 34. 在排序数组中查找元素的第一个和最后一个位置
     ///
     /// 二分查找第一个大于或者大于等于target的下标
-    fn binary_search(nums: &Vec<i32>, target: i32, equal: bool) -> i32 {
+    fn binary_search(nums: &[i32], target: i32, equal: bool) -> i32 {
         let (mut l, mut r) = (0, nums.len() as i32 - 1);
         while l <= r {
             let p = (l + r) / 2;
