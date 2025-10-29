@@ -5,7 +5,7 @@ impl Solution {
     fn word_to_mask(word: &str) -> u32 {
         word.as_bytes()
             .iter()
-            .fold(0, |acc, e| (acc | (1 << (e - b'a'))))
+            .fold(0, |acc, e| acc | (1 << (e - b'a')))
     }
 
     #[allow(dead_code)]

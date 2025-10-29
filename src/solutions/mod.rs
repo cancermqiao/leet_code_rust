@@ -24,4 +24,5 @@ mod s3000_3099;
 
 
 mod lcp;
+mod lcr;
 
