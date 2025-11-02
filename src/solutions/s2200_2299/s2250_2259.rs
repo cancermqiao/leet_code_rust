@@ -1,6 +1,37 @@
 pub struct Solution;
 
 impl Solution {
+    /// 2257. 统计网格图中没有被保卫的格子数
+    #[allow(dead_code)]
+    pub fn count_unguarded(m: i32, n: i32, guards: Vec<Vec<i32>>, walls: Vec<Vec<i32>>) -> i32 {
+        let mut grid = vec![vec![0; n as usize]; m as usize];
+        let mut guard_cnt = 0;
+        for wall in walls {
+            grid[wall[0] as usize][wall[1] as usize] = 2;
+            guard_cnt += 1
+        }
+        for guard in &guards {
+            grid[guard[0] as usize][guard[1] as usize] = 2;
+            guard_cnt += 1;
+        }
+        for guard in guards {
+            for (dx, dy) in [(0, 1), (0, -1), (1, 0), (-1, 0)] {
+                let (mut x, mut y) = (guard[0], guard[1]);
+                while x + dx >= 0 && x + dx < m && y + dy >= 0 && y + dy < n {
+                    x += dx;
+                    y += dy;
+                    if grid[x as usize][y as usize] == 2 {
+                        break;
+                    } else if grid[x as usize][y as usize] == 0 {
+                        grid[x as usize][y as usize] = 1;
+                        guard_cnt += 1;
+                    }
+                }
+            }
+        }
+        m * n - guard_cnt
+    }
+
     /// 2258. 逃离火灾
     #[allow(dead_code)]
     pub fn maximum_minutes(grid: Vec<Vec<i32>>) -> i32 {
@@ -79,6 +110,17 @@ impl Solution {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// 2257. 统计网格图中没有被保卫的格子数
+    #[test]
+    fn count_unguarded() {
+        let m = 4;
+        let n = 6;
+        let guards = vec![vec![0, 0], vec![1, 1], vec![2, 3]];
+        let walls = vec![vec![0, 1], vec![2, 2], vec![1, 4]];
+        let res = Solution::count_unguarded(m, n, guards, walls);
+        assert_eq!(res, 7);
+    }
 
     /// 2258. 逃离火灾
     #[test]
