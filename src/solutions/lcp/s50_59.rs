@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// LCP 50. 宝石补给
-    #[allow(dead_code)]
     pub fn give_gem(mut gem: Vec<i32>, operations: Vec<Vec<i32>>) -> i32 {
         for operation in operations {
             gem[operation[1] as usize] += gem[operation[0] as usize] / 2;

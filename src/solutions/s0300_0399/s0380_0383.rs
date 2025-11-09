@@ -2,17 +2,18 @@ pub struct Solution;
 
 impl Solution {
     /// 383. 赎金信
-    #[allow(dead_code)]
     pub fn can_construct(ransom_note: String, magazine: String) -> bool {
         if ransom_note.len() > magazine.len() {
-            return false
+            return false;
         }
         let mut chars_nums = [0; 26];
-        magazine.chars().for_each(|x| chars_nums[x as usize - 'a' as usize] += 1);
+        magazine
+            .chars()
+            .for_each(|x| chars_nums[x as usize - 'a' as usize] += 1);
         for c in ransom_note.chars() {
-            chars_nums[c as usize -'a' as usize ] -= 1;
-            if chars_nums[c as usize -'a' as usize ] < 0 {
-                return false
+            chars_nums[c as usize - 'a' as usize] -= 1;
+            if chars_nums[c as usize - 'a' as usize] < 0 {
+                return false;
             }
         }
         true

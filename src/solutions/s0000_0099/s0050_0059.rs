@@ -14,7 +14,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn my_pow(x: f64, n: i32) -> f64 {
         if n >= 0 {
             Self::quick_mul(x, n as i64)
@@ -62,7 +61,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn solve_n_queens(n: i32) -> Vec<Vec<String>> {
         let n = n as usize;
         let (mut buf, mut res) = (Vec::new(), Vec::new());
@@ -108,7 +106,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn total_n_queens(n: i32) -> i32 {
         let n = n as usize;
         let (mut buf, mut res) = (Vec::new(), 0);
@@ -126,7 +123,6 @@ impl Solution {
     }
 
     /// 53. 最大子数组和
-    #[allow(dead_code)]
     pub fn max_sub_array(nums: Vec<i32>) -> i32 {
         let (mut pre, mut res) = (0, i32::MIN);
         for num in nums {
@@ -138,7 +134,6 @@ impl Solution {
     }
 
     /// 54. 螺旋矩阵
-    #[allow(dead_code)]
     pub fn spiral_order(matrix: Vec<Vec<i32>>) -> Vec<i32> {
         let (mut top, mut bottom, mut left, mut right) =
             (0, matrix.len() as i32 - 1, 0, matrix[0].len() as i32 - 1);
@@ -174,7 +169,6 @@ impl Solution {
     }
 
     /// 55. 跳跃游戏
-    #[allow(dead_code)]
     pub fn can_jump(nums: Vec<i32>) -> bool {
         let mut step = 1;
         for i in (0..(nums.len() - 1)).rev() {
@@ -188,7 +182,6 @@ impl Solution {
     }
 
     /// 56. 合并区间
-    #[allow(dead_code)]
     pub fn merge(mut intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         intervals.sort_by_key(|k| k[0]);
 
@@ -208,7 +201,6 @@ impl Solution {
     }
 
     /// 57. 插入区间
-    #[allow(dead_code)]
     pub fn insert(intervals: Vec<Vec<i32>>, new_interval: Vec<i32>) -> Vec<Vec<i32>> {
         let (mut left, mut right) = (new_interval[0], new_interval[1]);
         let mut res = Vec::new();
@@ -236,7 +228,6 @@ impl Solution {
     }
 
     /// 58. 最后一个单次
-    #[allow(dead_code)]
     pub fn length_of_last_word(s: String) -> i32 {
         let mut res = 0;
         for c in s.chars().rev() {
@@ -250,7 +241,6 @@ impl Solution {
     }
 
     /// 59. 螺旋矩阵 II
-    #[allow(dead_code)]
     pub fn generate_matrix(n: i32) -> Vec<Vec<i32>> {
         if n == 1 {
             return vec![vec![1]];

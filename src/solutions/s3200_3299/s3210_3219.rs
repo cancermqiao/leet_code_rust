@@ -1,10 +1,9 @@
-use crate::model::list::{List, ListNode};
+use crate::model::list::ListNode;
 
 pub struct Solution;
 
 impl Solution {
     /// 3217. 从链表中移除在数组中存在的节点
-    #[allow(dead_code)]
     pub fn modified_list(
         nums: Vec<i32>,
         head: Option<Box<ListNode<i32>>>,
@@ -27,6 +26,7 @@ impl Solution {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::model::list::List;
 
     /// 3217. 从链表中移除在数组中存在的节点
     #[test]

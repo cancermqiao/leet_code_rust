@@ -4,7 +4,6 @@ pub struct Solution;
 
 impl Solution {
     /// 20. 有效括号
-    #[allow(dead_code)]
     pub fn is_valid(s: String) -> bool {
         let sets_map = std::collections::HashMap::from([(')', '('), (']', '['), ('}', '{')]);
         let mut stack = Vec::new();
@@ -26,7 +25,6 @@ impl Solution {
     }
 
     /// 21. 合并两个有序链表
-    #[allow(dead_code)]
     pub fn merge_two_lists(
         list1: Option<Box<ListNode<i32>>>,
         list2: Option<Box<ListNode<i32>>>,
@@ -62,7 +60,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn generate_parenthesis(n: i32) -> Vec<String> {
         let mut res = Vec::new();
         let mut buf = "".to_string();
@@ -71,7 +68,6 @@ impl Solution {
     }
 
     /// 23. 合并k个升序列表
-    #[allow(dead_code)]
     pub fn merge_k_lists(lists: Vec<Option<Box<ListNode<i32>>>>) -> Option<Box<ListNode<i32>>> {
         let n = lists.len();
         if n == 0 {
@@ -89,7 +85,6 @@ impl Solution {
     }
 
     /// 24. 两两交换链表中的节点
-    #[allow(dead_code)]
     pub fn swap_pairs(head: Option<Box<ListNode<i32>>>) -> Option<Box<ListNode<i32>>> {
         if let Some(mut node1) = head {
             if let Some(mut node2) = node1.next.take() {
@@ -116,7 +111,6 @@ impl Solution {
         next_head
     }
 
-    #[allow(dead_code)]
     pub fn reverse_k_group(
         mut head: Option<Box<ListNode<i32>>>,
         k: i32,
@@ -134,7 +128,6 @@ impl Solution {
     }
 
     /// 26. 删除有序数组中的重复项
-    #[allow(dead_code)]
     pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
         let mut p = 0;
         for i in 1..nums.len() {
@@ -147,7 +140,6 @@ impl Solution {
     }
 
     /// 27. 移除元素
-    #[allow(dead_code)]
     pub fn remove_element(nums: &mut Vec<i32>, val: i32) -> i32 {
         let mut p = 0;
         for i in 0..nums.len() {
@@ -160,7 +152,6 @@ impl Solution {
     }
 
     /// 28. 找出字符串中第一个匹配项的下标
-    #[allow(dead_code)]
     pub fn str_str(haystack: String, needle: String) -> i32 {
         if haystack.len() < needle.len() {
             return -1;
@@ -198,7 +189,6 @@ impl Solution {
         true
     }
 
-    #[allow(dead_code)]
     pub fn divide(mut dividend: i32, mut divisor: i32) -> i32 {
         if dividend == 0 {
             return 0;

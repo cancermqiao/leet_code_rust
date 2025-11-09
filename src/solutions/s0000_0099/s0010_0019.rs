@@ -52,7 +52,6 @@ impl Solution {
         dp[m][n]
     }
 
-    #[allow(dead_code)]
     pub fn is_match(s: String, p: String, method_type: &str) -> bool {
         let (s, p) = (s.as_bytes(), p.as_bytes());
         match method_type {
@@ -63,7 +62,6 @@ impl Solution {
     }
 
     /// 11. 盛最多水的容器
-    #[allow(dead_code)]
     pub fn max_area(height: Vec<i32>) -> i32 {
         let (mut l, mut r) = (0, height.len() - 1);
         let mut max_area = 0;
@@ -79,7 +77,6 @@ impl Solution {
     }
 
     /// 12. 整数转罗马数字
-    #[allow(dead_code)]
     pub fn int_to_roman(mut num: i32) -> String {
         let value_roman_vec = vec![
             (1000, "M"),
@@ -107,7 +104,6 @@ impl Solution {
     }
 
     /// 13. 罗马数字转整数
-    #[allow(dead_code)]
     pub fn roman_to_int(s: String) -> i32 {
         let roman_int_map = HashMap::from([
             ('I', 1),
@@ -132,7 +128,6 @@ impl Solution {
     }
 
     /// 14. 最长公共前缀
-    #[allow(dead_code)]
     pub fn longest_common_prefix(strs: Vec<String>) -> String {
         if strs.is_empty() {
             return "".to_string();
@@ -148,7 +143,6 @@ impl Solution {
     }
 
     /// 15. 三数之和
-    #[allow(dead_code)]
     pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
         nums.sort_unstable();
         let mut res = Vec::new();
@@ -180,7 +174,6 @@ impl Solution {
     }
 
     /// 16. 最接近的三数之和
-    #[allow(dead_code)]
     pub fn three_sum_closest(mut nums: Vec<i32>, target: i32) -> i32 {
         nums.sort();
         let mut res = nums[0] + nums[1] + nums[2];
@@ -229,7 +222,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn letter_combinations(digits: String, method_type: &str) -> Vec<String> {
         let map = HashMap::from([
             (b'2', "abc"),
@@ -254,7 +246,6 @@ impl Solution {
     }
 
     /// 18. 四数之和
-    #[allow(dead_code)]
     pub fn four_sum(mut nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         let mut res = Vec::new();
         let n = nums.len();
@@ -316,7 +307,6 @@ impl Solution {
     }
 
     /// 19. 删除链表的倒数第 N 个结点
-    #[allow(dead_code)]
     pub fn remove_nth_from_end(
         head: Option<Box<ListNode<i32>>>,
         n: i32,

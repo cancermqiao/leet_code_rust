@@ -11,7 +11,6 @@ pub struct TreeNode {
 
 impl TreeNode {
     #[inline]
-    #[allow(dead_code)]
     pub fn new(val: i32) -> Self {
         TreeNode {
             val,

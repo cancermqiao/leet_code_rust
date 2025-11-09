@@ -10,7 +10,6 @@ pub struct Solution;
 
 impl Solution {
     /// 1654. 到家的最小跳跃次数
-    #[allow(dead_code)]
     pub fn minimum_jumps(forbidden: Vec<i32>, a: i32, b: i32, x: i32) -> i32 {
         let mut visited_position = std::collections::HashSet::new();
         visited_position.insert(0);

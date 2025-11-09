@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 242. 有效的字母异位词
-    #[allow(dead_code)]
     pub fn is_anagram(s: String, t: String) -> bool {
         if s.len() != t.len() {
             return false;

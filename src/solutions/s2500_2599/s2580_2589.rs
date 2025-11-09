@@ -28,7 +28,6 @@ pub struct Solution;
 
 impl Solution {
     /// 2582. 递枕头
-    #[allow(dead_code)]
     pub fn pass_the_pillow(n: i32, time: i32) -> i32 {
         if time / (n - 1) % 2 == 0 {
             1 + time % (n - 1)
@@ -38,7 +37,6 @@ impl Solution {
     }
 
     /// 2586. 统计范围内的元音字符串数
-    #[allow(dead_code)]
     pub fn vowel_strings(words: Vec<String>, left: i32, right: i32) -> i32 {
         words
             .iter()

@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 833. 字符串中的查找与替换
-    #[allow(dead_code)]
     pub fn find_replace_string(
         s: String,
         indices: Vec<i32>,

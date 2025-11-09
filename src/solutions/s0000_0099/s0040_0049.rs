@@ -27,7 +27,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn combination_sum2(mut candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         let (mut buf, mut res) = (Vec::new(), Vec::new());
         if candidates.is_empty() {
@@ -48,7 +47,6 @@ impl Solution {
     }
 
     /// 41. 缺失的第一个正数
-    #[allow(dead_code)]
     pub fn first_missing_positive(nums: Vec<i32>) -> i32 {
         let n = nums.len();
         let mut nums: Vec<i32> = nums
@@ -58,7 +56,7 @@ impl Solution {
         for i in 0..n {
             let num_abs = nums[i].unsigned_abs() as usize;
             if num_abs <= n {
-                nums[num_abs - 1] = -nums[num_abs-1].abs();
+                nums[num_abs - 1] = -nums[num_abs - 1].abs();
             }
         }
         for (i, &v) in nums.iter().enumerate() {
@@ -70,7 +68,6 @@ impl Solution {
     }
 
     /// 42. 接雨水
-    #[allow(dead_code)]
     pub fn trap(height: Vec<i32>) -> i32 {
         let mut stack = Vec::new();
         let mut res = 0;
@@ -89,7 +86,6 @@ impl Solution {
     }
 
     /// 43. 字符串相乘
-    #[allow(dead_code)]
     pub fn multiply(num1: String, num2: String) -> String {
         if num1 == *"0" || num2 == *"0" {
             return "0".to_string();
@@ -166,7 +162,6 @@ impl Solution {
         dp[m][n]
     }
 
-    #[allow(dead_code)]
     pub fn is_match(s: String, p: String, method_type: &str) -> bool {
         let (s, p) = (s.as_bytes(), p.as_bytes());
         match method_type {
@@ -177,7 +172,6 @@ impl Solution {
     }
 
     /// 45. 跳跃游戏 II
-    #[allow(dead_code)]
     pub fn jump(nums: Vec<i32>) -> i32 {
         let (mut max_pos, mut step, mut end) = (0, 0, 0);
         for i in 0..nums.len() - 1 {
@@ -206,7 +200,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn permute(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut res = Vec::new();
         Self::dfs(&mut nums, &mut res, 0);
@@ -236,7 +229,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn permute_unique(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
         nums.sort();
         let (mut res, mut buf, mut visited) = (Vec::new(), Vec::new(), vec![false; nums.len()]);
@@ -245,7 +237,6 @@ impl Solution {
     }
 
     /// 48. 旋转图像
-    #[allow(dead_code)]
     pub fn rotate(matrix: &mut Vec<Vec<i32>>) {
         let n = matrix.len();
         for i in 0..(n / 2) {
@@ -260,7 +251,6 @@ impl Solution {
     }
 
     /// 49. 字母异分词
-    #[allow(dead_code)]
     pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
         let mut cache: std::collections::HashMap<Vec<usize>, Vec<String>> =
             std::collections::HashMap::new();

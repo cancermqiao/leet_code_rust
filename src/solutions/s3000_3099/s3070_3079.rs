@@ -2,13 +2,12 @@ pub struct Solution;
 
 impl Solution {
     /// 3075. 幸福值最大化的选择方案
-    #[allow(dead_code)]
     pub fn maximum_happiness_sum(mut happiness: Vec<i32>, k: i32) -> i64 {
         happiness.sort_unstable();
         let mut max_happiness = 0;
         let n = happiness.len();
         for i in 0..k {
-            max_happiness += (happiness[n-i as usize-1] - i).max(0) as i64;
+            max_happiness += (happiness[n - i as usize - 1] - i).max(0) as i64;
         }
         max_happiness
     }

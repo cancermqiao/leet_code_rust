@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 2525. 根据箱子的规则分类
-    #[allow(dead_code)]
     pub fn categorize_box(length: i32, width: i32, height: i32, mass: i32) -> String {
         let max_length = length.max(width).max(height);
         let vol = length as i64 * width as i64 * height as i64;

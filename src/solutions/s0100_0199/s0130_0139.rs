@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 130. 被围绕的区域
-    #[allow(dead_code)]
     pub fn solve(board: &mut Vec<Vec<char>>) {
         let (nr, nc) = (board.len(), board[0].len());
         let mut stack = Vec::new();
@@ -56,7 +55,6 @@ impl Solution {
     }
 
     /// 134. 加油站
-    #[allow(dead_code)]
     pub fn can_complete_circuit(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
         let (mut i, n) = (0, gas.len());
         while i < n {
@@ -81,7 +79,6 @@ impl Solution {
     }
 
     /// 135. 分发糖果
-    #[allow(dead_code)]
     pub fn candy(ratings: Vec<i32>) -> i32 {
         let mut candy_num = vec![1; ratings.len()];
         for i in 1..ratings.len() {
@@ -98,13 +95,11 @@ impl Solution {
     }
 
     /// 136. 只出现一次的数字
-    #[allow(dead_code)]
     pub fn single_number1(nums: Vec<i32>) -> i32 {
         nums.iter().fold(0, |acc, num| acc ^ num)
     }
 
     /// 137. 只出现一次的数字 II
-    #[allow(dead_code)]
     pub fn single_number2(nums: Vec<i32>) -> i32 {
         let mut res = 0;
         for i in 0..32 {
@@ -120,7 +115,6 @@ impl Solution {
     }
 
     /// 139. 单次拆分
-    #[allow(dead_code)]
     pub fn word_break(s: String, word_dict: Vec<String>) -> bool {
         let n = word_dict.iter().map(|x| x.len()).max().unwrap();
         let mut dp = vec![0];

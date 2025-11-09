@@ -10,7 +10,6 @@ pub struct Solution;
 
 impl Solution {
     /// 1. 两数之和
-    #[allow(dead_code)]
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let mut cache = std::collections::HashMap::new();
         for (i, num) in nums.iter().enumerate() {
@@ -49,7 +48,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn add_two_numbers(
         l1: Option<Box<ListNode<i32>>>,
         l2: Option<Box<ListNode<i32>>>,
@@ -58,7 +56,6 @@ impl Solution {
     }
 
     /// 3. 无重复字符的最长子串
-    #[allow(dead_code)]
     pub fn length_of_longest_substring(s: String) -> i32 {
         let (mut start, mut max_length) = (0, 0);
         let mut nums_index = std::collections::HashMap::new();
@@ -79,7 +76,6 @@ impl Solution {
     }
 
     /// 4. 寻找两个正序数组的中位数
-    #[allow(dead_code)]
     pub fn find_median_sorted_arrays(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
         let mid = (nums1.len() + nums2.len()) / 2;
         let (mut pre, mut cur) = (0, 0);
@@ -119,7 +115,6 @@ impl Solution {
         (l + 1, r - 1)
     }
 
-    #[allow(dead_code)]
     pub fn longest_palindrome(s: String) -> String {
         if s.is_empty() {
             return s;
@@ -143,7 +138,6 @@ impl Solution {
     }
 
     ///6. N字形变换
-    #[allow(dead_code)]
     pub fn convert(s: String, num_rows: i32) -> String {
         if num_rows < 2 {
             return s;
@@ -161,7 +155,6 @@ impl Solution {
     }
 
     /// 7. 整数反转
-    #[allow(dead_code)]
     pub fn reverse(mut x: i32) -> i32 {
         let mut res = 0;
         while x != 0 {
@@ -175,7 +168,6 @@ impl Solution {
     }
 
     /// 8. 字符串转换整数（atoi）
-    #[allow(dead_code)]
     pub fn my_atoi(s: String) -> i32 {
         let mut state = State::Blank;
         let mut res = 0_i64;
@@ -216,7 +208,6 @@ impl Solution {
     }
 
     /// 9. 回文数
-    #[allow(dead_code)]
     pub fn is_palindrome(mut x: i32) -> bool {
         // 0
         if x == 0 {

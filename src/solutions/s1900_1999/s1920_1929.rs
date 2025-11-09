@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 1921. 消灭怪物的最大数量
-    #[allow(dead_code)]
     pub fn eliminate_maximum(dist: Vec<i32>, speed: Vec<i32>) -> i32 {
         let mut arrive_times = dist
             .iter()

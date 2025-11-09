@@ -17,7 +17,6 @@ impl Solution {
         count
     }
 
-    #[allow(dead_code)]
     pub fn min_capability(nums: Vec<i32>, k: i32) -> i32 {
         let (mut l, mut r) = (*nums.iter().min().unwrap(), *nums.iter().max().unwrap());
         while l < r {
@@ -33,7 +32,6 @@ impl Solution {
     }
 
     /// 2562. 找出数组的串联值
-    #[allow(dead_code)]
     pub fn find_the_array_conc_val(mut nums: Vec<i32>) -> i64 {
         let mut res = 0;
         while !nums.is_empty() {

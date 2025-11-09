@@ -5,7 +5,6 @@ pub struct Solution;
 
 impl Solution {
     /// 70. 爬楼梯
-    #[allow(dead_code)]
     pub fn climb_stairs(n: i32) -> i32 {
         let (mut pre, mut prepre) = (1, 0);
         for _ in 0..n {
@@ -17,7 +16,6 @@ impl Solution {
     }
 
     /// 71. 简化路径
-    #[allow(dead_code)]
     pub fn simplify_path(path: String) -> String {
         let mut res = Vec::new();
         for item in path.split('/').filter(|e| !e.is_empty()) {
@@ -31,7 +29,6 @@ impl Solution {
     }
 
     /// 72. 编辑距离
-    #[allow(dead_code)]
     pub fn min_distance(word1: String, word2: String) -> i32 {
         let (m, n) = (word1.len(), word2.len());
         if n * m == 0 {
@@ -57,7 +54,6 @@ impl Solution {
     }
 
     /// 73. 矩阵置零
-    #[allow(dead_code)]
     pub fn set_zeroes(matrix: &mut Vec<Vec<i32>>) {
         let (nr, nc) = (matrix.len(), matrix[0].len());
         let first_row = (0..nc).any(|x| matrix[0][x] == 0);
@@ -92,7 +88,6 @@ impl Solution {
     }
 
     /// 74. 搜索二维矩阵
-    #[allow(dead_code)]
     pub fn search_matrix(matrix: Vec<Vec<i32>>, target: i32) -> bool {
         let (m, n) = (matrix.len() as i32, matrix[0].len() as i32);
         let (mut l, mut r) = (0, m * n - 1);
@@ -109,7 +104,6 @@ impl Solution {
     }
 
     /// 75. 颜色分类
-    #[allow(dead_code)]
     pub fn sort_colors(nums: &mut Vec<i32>) {
         let (mut i, mut one_flag, mut two_flag, mut overflow) = (0, 0, nums.len() - 1, false);
         while !overflow && i <= two_flag {
@@ -142,7 +136,6 @@ impl Solution {
         true
     }
 
-    #[allow(dead_code)]
     pub fn min_window(s: String, t: String) -> String {
         let (mut res, mut length) = (String::new(), s.len() + 1);
         let (mut l, mut r) = (0, 0);
@@ -171,7 +164,6 @@ impl Solution {
     }
 
     /// 77. 组合
-    #[allow(dead_code)]
     pub fn combine(n: i32, k: i32) -> Vec<Vec<i32>> {
         fn backtrace(l: i32, n: i32, k: i32, combine: &mut Vec<i32>, res: &mut Vec<Vec<i32>>) {
             if combine.len() == k as usize {
@@ -191,7 +183,6 @@ impl Solution {
     }
 
     /// 78. 子集
-    #[allow(dead_code)]
     pub fn subsets(nums: Vec<i32>) -> Vec<Vec<i32>> {
         fn backtrace(l: usize, nums: &Vec<i32>, subset: &mut Vec<i32>, res: &mut Vec<Vec<i32>>) {
             for (i, num) in nums.iter().skip(l).enumerate() {
@@ -208,7 +199,6 @@ impl Solution {
     }
 
     /// 79. 单词搜索
-    #[allow(dead_code)]
     pub fn exist(board: Vec<Vec<char>>, word: String) -> bool {
         let chars = word.chars().collect::<Vec<char>>();
         let chars = chars.as_slice();

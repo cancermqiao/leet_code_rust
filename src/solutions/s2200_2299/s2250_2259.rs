@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 2257. 统计网格图中没有被保卫的格子数
-    #[allow(dead_code)]
     pub fn count_unguarded(m: i32, n: i32, guards: Vec<Vec<i32>>, walls: Vec<Vec<i32>>) -> i32 {
         let mut grid = vec![vec![0; n as usize]; m as usize];
         let mut guard_cnt = 0;
@@ -33,7 +32,6 @@ impl Solution {
     }
 
     /// 2258. 逃离火灾
-    #[allow(dead_code)]
     pub fn maximum_minutes(grid: Vec<Vec<i32>>) -> i32 {
         let (nr, nc) = (grid.len(), grid[0].len());
         let bfs = |pos: &mut Vec<(usize, usize)>| -> (i32, i32, i32) {

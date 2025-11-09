@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 97. 交错字符串
-    #[allow(dead_code)]
     pub fn is_interleave(s1: String, s2: String, s3: String) -> bool {
         let (n1, n2, n3) = (s1.len(), s2.len(), s3.len());
         if n1 + n2 != n3 {

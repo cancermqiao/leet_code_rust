@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 150. 逆波兰表达式求值
-    #[allow(dead_code)]
     pub fn eval_rpn(tokens: Vec<String>) -> i32 {
         let mut stack: Vec<i32> = Vec::new();
         tokens.iter().for_each(|token| {
@@ -23,13 +22,11 @@ impl Solution {
     }
 
     /// 151. 反转字符串中的单词
-    #[allow(dead_code)]
     pub fn reverse_words(s: String) -> String {
         s.split_whitespace().rev().collect::<Vec<&str>>().join(" ")
     }
 
     /// 152. 乘积最大子数组
-    #[allow(dead_code)]
     pub fn max_product(nums: Vec<i32>) -> i32 {
         let mut dp_max = vec![nums[0]];
         let mut dp_min = vec![nums[0]];
@@ -49,7 +46,6 @@ impl Solution {
     }
 
     /// 153. 寻找旋转排序数组中的最小值
-    #[allow(dead_code)]
     pub fn find_min(nums: Vec<i32>) -> i32 {
         let (mut l, mut r) = (0, nums.len() - 1);
         if nums[r] > nums[l] {

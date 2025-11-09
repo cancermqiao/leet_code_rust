@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 2591. 将钱分给最多的儿童
-    #[allow(dead_code)]
     pub fn dist_money(mut money: i32, children: i32) -> i32 {
         if money < children {
             return -1;
@@ -28,7 +27,6 @@ impl Solution {
     }
 
     /// 2594. 修车的最少时间
-    #[allow(dead_code)]
     pub fn repair_cars(ranks: Vec<i32>, cars: i32) -> i64 {
         let (mut l, mut r) = (0, ranks[0] as i64 * cars as i64 * cars as i64);
         while l <= r {
@@ -47,7 +45,6 @@ impl Solution {
     }
 
     /// 2596. 检查骑士巡视方案
-    #[allow(dead_code)]
     pub fn check_valid_grid(grid: Vec<Vec<i32>>) -> bool {
         if grid[0][0] != 0 {
             return false;

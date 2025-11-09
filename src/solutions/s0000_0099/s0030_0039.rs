@@ -4,7 +4,6 @@ pub struct Solution;
 
 impl Solution {
     /// 30. 串联所有单词的子串
-    #[allow(dead_code)]
     pub fn find_substring(s: String, words: Vec<String>) -> Vec<i32> {
         let mut res = Vec::new();
         let (m, n, ls) = (words[0].len(), words.len(), s.len());
@@ -48,7 +47,6 @@ impl Solution {
     }
 
     /// 31. 下一个排列
-    #[allow(dead_code)]
     pub fn next_permutation(nums: &mut Vec<i32>) {
         let mut i = nums.len() as i32 - 2;
         while i >= 0 && nums[i as usize] >= nums[i as usize + 1] {
@@ -70,7 +68,6 @@ impl Solution {
     }
 
     /// 32. 最长有效括号
-    #[allow(dead_code)]
     pub fn longest_valid_parentheses(s: String) -> i32 {
         let s = s.as_bytes();
         let mut res = 0;
@@ -91,7 +88,6 @@ impl Solution {
     }
 
     /// 33. 搜索旋转排序数组
-    #[allow(dead_code)]
     pub fn search(nums: Vec<i32>, target: i32) -> i32 {
         let (mut l, mut r) = (0, nums.len() - 1);
         while l <= r {
@@ -136,7 +132,6 @@ impl Solution {
         l
     }
 
-    #[allow(dead_code)]
     pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let left_index = Solution::binary_search(&nums, target, true);
         let right_index = Solution::binary_search(&nums, target, false) - 1;
@@ -148,7 +143,6 @@ impl Solution {
     }
 
     /// 35. 搜索插入位置
-    #[allow(dead_code)]
     pub fn search_insert(nums: Vec<i32>, target: i32) -> i32 {
         let (mut l, mut r) = (0_i32, nums.len() as i32 - 1);
         while l <= r {
@@ -163,7 +157,6 @@ impl Solution {
     }
 
     /// 36. 有效的数独
-    #[allow(dead_code)]
     pub fn is_valid_sudoku(board: Vec<Vec<char>>) -> bool {
         let mut rows = vec![vec![0; 9]; 9];
         let mut cols = vec![vec![0; 9]; 9];
@@ -220,7 +213,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn solve_sudoku(board: &mut Vec<Vec<char>>) {
         let mut rows = vec![vec![false; 9]; 9];
         let mut cols = vec![vec![false; 9]; 9];
@@ -298,7 +290,6 @@ impl Solution {
         res
     }
 
-    #[allow(dead_code)]
     pub fn count_and_say(n: i32, method_type: &str) -> String {
         match method_type {
             "recursion" => Self::recursion(n),
@@ -330,7 +321,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn combination_sum(candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         let (mut buf, mut res) = (Vec::new(), Vec::new());
         Self::backtrace(&candidates, target, &mut buf, &mut res, 0);

@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 1726. 同积元祖
-    #[allow(dead_code)]
     pub fn tuple_same_product(nums: Vec<i32>) -> i32 {
         let mut cnt_map = std::collections::HashMap::new();
         for i in 0..nums.len() - 1 {

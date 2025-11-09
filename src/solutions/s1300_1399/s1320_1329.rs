@@ -38,7 +38,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn diagonal_sort(mat: &mut Vec<Vec<i32>>) {
         let (m, n) = (mat.len() as i32, mat[0].len() as i32);
         for diagnal_difference in (-n + 1)..m {

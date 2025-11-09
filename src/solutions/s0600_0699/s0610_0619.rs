@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 611. 有效三角形的个数
-    #[allow(dead_code)]
     pub fn triangle_number(mut nums: Vec<i32>) -> i32 {
         nums.sort();
         let mut res = 0;

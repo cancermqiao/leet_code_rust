@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 290. 单词规律
-    #[allow(dead_code)]
     pub fn word_pattern(pattern: String, s: String) -> bool {
         let words = s.split(' ').collect::<Vec<&str>>();
         if pattern.len() != words.len() {

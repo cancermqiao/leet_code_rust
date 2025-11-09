@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 1333. 餐厅过滤器
-    #[allow(dead_code)]
     pub fn filter_restaurants(
         restaurants: Vec<Vec<i32>>,
         vegan_friendly: i32,

@@ -4,7 +4,6 @@ pub struct Solution;
 
 impl Solution {
     /// 162. 寻找峰值
-    #[allow(dead_code)]
     pub fn find_peak_element(nums: Vec<i32>) -> i32 {
         let (mut l, mut r) = (0, nums.len() as i32 - 1);
         while l < r {
@@ -19,7 +18,6 @@ impl Solution {
     }
 
     /// 167. 两数之和 II - 输入有序数组
-    #[allow(dead_code)]
     pub fn two_sum(numbers: Vec<i32>, target: i32) -> Vec<i32> {
         let (mut i, mut j) = (0, numbers.len() - 1);
         while i < j {
@@ -34,7 +32,6 @@ impl Solution {
     }
 
     /// 169. 多数元素
-    #[allow(dead_code)]
     pub fn majority_element(nums: Vec<i32>) -> i32 {
         let mut res = nums[0];
         let mut count = 1;

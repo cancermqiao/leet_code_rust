@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 2511. 最多可以摧毁的敌人城堡数
-    #[allow(dead_code)]
     pub fn capture_forts(forts: Vec<i32>) -> i32 {
         let (mut res, mut pre) = (0_i32, -1_i32);
         for (i, &fort) in forts.iter().enumerate() {
@@ -17,7 +16,6 @@ impl Solution {
     }
 
     /// 2512. 奖励最顶尖的 K 名学生
-    #[allow(dead_code)]
     pub fn top_students(
         positive_feedback: Vec<String>,
         negative_feedback: Vec<String>,

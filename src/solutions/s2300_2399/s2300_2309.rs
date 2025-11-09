@@ -20,7 +20,6 @@ impl Solution {
         potions.len() as i32 - l
     }
 
-    #[allow(dead_code)]
     pub fn successful_pairs(spells: Vec<i32>, mut potions: Vec<i32>, success: i64) -> Vec<i32> {
         potions.sort_unstable();
         spells

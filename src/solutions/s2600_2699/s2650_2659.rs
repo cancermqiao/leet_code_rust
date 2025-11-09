@@ -2,13 +2,11 @@ pub struct Solution;
 
 impl Solution {
     /// 2651. 计算列车到站时间
-    #[allow(dead_code)]
     pub fn find_delayed_arrival_time(arrival_time: i32, delayed_time: i32) -> i32 {
         (arrival_time + delayed_time) % 24
     }
 
     /// 2652. 倍数求和
-    #[allow(dead_code)]
     pub fn sum_of_multiples(n: i32) -> i32 {
         let mut res = 0;
         for i in 1..=n {

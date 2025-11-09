@@ -2,19 +2,18 @@ pub struct Solution;
 
 impl Solution {
     /// 228. 汇总区间
-    #[allow(dead_code)]
     pub fn summary_ranges(nums: Vec<i32>) -> Vec<String> {
         let mut res = Vec::new();
         let mut i = 0;
         while i < nums.len() {
             let mut j = i + 1;
-            while j < nums.len() && nums[j-1] + 1 == nums[j] {
+            while j < nums.len() && nums[j - 1] + 1 == nums[j] {
                 j += 1;
             }
             if j - 1 == i {
                 res.push(nums[i].to_string());
             } else {
-                res.push(format!("{}->{}", nums[i], nums[j-1]));
+                res.push(format!("{}->{}", nums[i], nums[j - 1]));
             }
             i = j;
         }

@@ -15,7 +15,6 @@ impl Solution {
         pre.max(cur)
     }
 
-    #[allow(dead_code)]
     pub fn rob(nums: Vec<i32>) -> i32 {
         let n = nums.len();
         if n == 1 {
@@ -30,7 +29,6 @@ impl Solution {
     /// 215. 数组中的第k个最大元素
     ///
     /// # 快排分治
-    #[allow(dead_code)]
     pub fn find_kth_largest(mut nums: Vec<i32>, k: i32) -> i32 {
         fn helper(nums: &mut Vec<i32>, l: usize, r: usize, k: i32) -> i32 {
             let pivot = l;
@@ -57,7 +55,6 @@ impl Solution {
     }
 
     /// 219. 存在重复元素 II
-    #[allow(dead_code)]
     pub fn contains_nearby_duplicate(nums: Vec<i32>, k: i32) -> bool {
         let mut last_index = std::collections::HashMap::new();
         for (i, num) in nums.iter().enumerate() {

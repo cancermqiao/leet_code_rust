@@ -135,7 +135,6 @@ pub struct Solution;
 
 impl Solution {
     /// 60. 排列序列
-    #[allow(dead_code)]
     pub fn get_permutation(n: i32, mut k: i32) -> String {
         let mut nums: Vec<String> = (1..=n).map(|x| x.to_string()).collect();
         let (mut cnts, mut multi) = (Vec::new(), 1);
@@ -156,7 +155,6 @@ impl Solution {
     }
 
     /// 61. 旋转链表
-    #[allow(dead_code)]
     pub fn rotate_right(
         mut head: Option<Box<ListNode<i32>>>,
         k: i32,
@@ -191,7 +189,6 @@ impl Solution {
     }
 
     /// 62. 不同路径
-    #[allow(dead_code)]
     pub fn unique_paths(m: i32, n: i32) -> i32 {
         let mut res = 1;
         let min = (m - 1).min(n - 1) as i64;
@@ -203,7 +200,6 @@ impl Solution {
     }
 
     /// 63. 不同路径 II
-    #[allow(dead_code)]
     pub fn unique_paths_with_obstacles(mut obstacle_grid: Vec<Vec<i32>>) -> i32 {
         let (nr, nc) = (obstacle_grid.len(), obstacle_grid[0].len());
         for i in 0..nr {
@@ -225,7 +221,6 @@ impl Solution {
     }
 
     /// 64. 最小路径和
-    #[allow(dead_code)]
     pub fn min_path_sum(mut grid: Vec<Vec<i32>>) -> i32 {
         let (nr, nc) = (grid.len(), grid[0].len());
         for i in 0..nr {
@@ -245,7 +240,6 @@ impl Solution {
     }
 
     /// 65. 有效数字
-    #[allow(dead_code)]
     pub fn is_number(s: String) -> bool {
         let mut state = State::Initial;
         for c in s.chars() {
@@ -258,7 +252,6 @@ impl Solution {
     }
 
     /// 66. 加一
-    #[allow(dead_code)]
     pub fn plus_one(mut digits: Vec<i32>) -> Vec<i32> {
         let mut remaind = 1;
         for i in (0..digits.len()).rev() {
@@ -281,7 +274,6 @@ impl Solution {
     }
 
     /// 67. 二进制求和
-    #[allow(dead_code)]
     pub fn add_binary(a: String, b: String) -> String {
         let (mut a, mut b) = (a.as_bytes().to_vec(), b.as_bytes().to_vec());
         let mut res = String::new();
@@ -315,7 +307,6 @@ impl Solution {
     }
 
     /// 68. 文本左右对齐
-    #[allow(dead_code)]
     pub fn full_justify(words: Vec<String>, max_width: i32) -> Vec<String> {
         let mut length = -1;
         let mut cur_words = Vec::new();
@@ -384,7 +375,6 @@ impl Solution {
     /// 69. x的平方根
     ///
     /// # 二分查找
-    #[allow(dead_code)]
     fn binary_search(x: i32) -> i32 {
         if x < 2 {
             return x;
@@ -403,7 +393,6 @@ impl Solution {
     }
 
     /// # 牛顿法
-    #[allow(dead_code)]
     pub fn newton_method(x: i32) -> i32 {
         if x < 2 {
             return x;

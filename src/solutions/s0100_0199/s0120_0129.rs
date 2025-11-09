@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 120. 三角形最小路径和
-    #[allow(dead_code)]
     pub fn minimum_total(mut triangle: Vec<Vec<i32>>) -> i32 {
         for level in (0..triangle.len() - 1).rev() {
             for i in 0..triangle[level].len() {
@@ -13,7 +12,6 @@ impl Solution {
     }
 
     /// 121. 买卖股票的最佳时机
-    #[allow(dead_code)]
     pub fn max_profit(prices: Vec<i32>) -> i32 {
         let mut profit = 0;
         let mut buy_price = prices[0];
@@ -25,7 +23,6 @@ impl Solution {
     }
 
     /// 122. 买卖股票的最佳时机 II
-    #[allow(dead_code)]
     pub fn max_profit_v2(prices: Vec<i32>) -> i32 {
         let mut profit = 0;
         let mut pre = prices[0];
@@ -39,7 +36,6 @@ impl Solution {
     }
 
     /// 123. 买卖股票的最佳时机 III
-    #[allow(dead_code)]
     pub fn max_profit_v3(prices: Vec<i32>) -> i32 {
         let (mut buy1, mut buy2) = (-prices[0], -prices[0]);
         let (mut sell1, mut sell2) = (0, 0);
@@ -53,7 +49,6 @@ impl Solution {
     }
 
     /// 125. 验证回文串
-    #[allow(dead_code)]
     pub fn is_palindrome(s: String) -> bool {
         let mut chars = s.chars().filter(|x| x.is_alphanumeric());
         while let (Some(a), Some(b)) = (chars.next(), chars.next_back()) {
@@ -65,7 +60,6 @@ impl Solution {
     }
 
     /// 128. 最长连续序列
-    #[allow(dead_code)]
     pub fn longest_consecutive(nums: Vec<i32>) -> i32 {
         let nums: std::collections::HashSet<i32> = nums.into_iter().collect();
         let mut longest_length = 0;

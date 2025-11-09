@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 2605. 从两个数字数组里生成最小数字
-    #[allow(dead_code)]
     pub fn min_number(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
         let mut count = [0; 9];
         for num in nums1 {
@@ -33,7 +32,6 @@ impl Solution {
     }
 
     /// 2609. 最长平衡子字符串
-    #[allow(dead_code)]
     pub fn find_the_longest_balanced_substring(s: String) -> i32 {
         let (mut res, mut zeros, mut ones) = (0, 0, 0);
         for c in s.chars() {

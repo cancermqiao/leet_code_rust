@@ -4,7 +4,6 @@ pub struct Solution;
 
 impl Solution {
     /// 80. 删除有序数组中的重复项 II
-    #[allow(dead_code)]
     pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
         let k = 2;
         if nums.len() <= k {
@@ -22,7 +21,6 @@ impl Solution {
     }
 
     /// 82. 删除排序链表中的重复元素 II
-    #[allow(dead_code)]
     pub fn delete_duplicates_ii(head: Option<Box<ListNode<i32>>>) -> Option<Box<ListNode<i32>>> {
         if let Some(mut head_node) = head {
             let val = head_node.val;
@@ -47,7 +45,6 @@ impl Solution {
     }
 
     /// 83. 删除排序链表中的重复元素
-    #[allow(dead_code)]
     pub fn delete_duplicates(head: Option<Box<ListNode<i32>>>) -> Option<Box<ListNode<i32>>> {
         if let Some(mut head_node) = head {
             let val = head_node.val;
@@ -66,7 +63,6 @@ impl Solution {
     }
 
     /// 88. 合并两个有序数组
-    #[allow(dead_code)]
     pub fn merge(nums1: &mut Vec<i32>, m: i32, nums2: &mut Vec<i32>, n: i32) {
         let mut i = m - 1;
         let mut j = n - 1;

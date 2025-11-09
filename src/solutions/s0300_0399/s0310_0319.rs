@@ -8,7 +8,6 @@ impl Solution {
             .fold(0, |acc, e| acc | (1 << (e - b'a')))
     }
 
-    #[allow(dead_code)]
     pub fn max_product(words: Vec<String>) -> i32 {
         let mask_lens: Vec<(u32, usize)> = words
             .iter()

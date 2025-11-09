@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 mod model;
-pub mod utils;
 mod solutions;
+pub mod utils;

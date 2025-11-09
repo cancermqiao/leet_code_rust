@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 560. 和为k的子数组
-    #[allow(dead_code)]
     pub fn subarray_sum(nums: Vec<i32>, k: i32) -> i32 {
         let mut res = 0;
         for i in 0..nums.len() {

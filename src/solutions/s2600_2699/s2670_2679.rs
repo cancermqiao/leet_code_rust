@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 2678. 老人的数目
-    #[allow(dead_code)]
     pub fn count_seniors(details: Vec<String>) -> i32 {
         details
             .iter()

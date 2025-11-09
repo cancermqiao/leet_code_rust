@@ -4,7 +4,6 @@ pub struct Solution;
 
 impl Solution {
     /// 823. 带因子的二叉树
-    #[allow(dead_code)]
     pub fn num_factored_binary_trees(arr: Vec<i32>) -> i32 {
         let mut arr: Vec<i64> = arr.iter().map(|&x| x as i64).collect();
         arr.sort_unstable();

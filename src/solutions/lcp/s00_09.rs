@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// LCP 06. 拿硬币
-    #[allow(dead_code)]
     pub fn min_count(coins: Vec<i32>) -> i32 {
         let mut res = 0;
         for coin in coins {

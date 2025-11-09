@@ -1,4 +1,3 @@
-#[allow(dead_code)]
 pub struct List<T>
 where
     T: Copy,
@@ -17,7 +16,6 @@ pub struct ListNode<T> {
 impl<T> ListNode<T> {
     /// 创建ListNode
     #[inline]
-    #[allow(dead_code)]
     pub fn new(val: T) -> Self {
         ListNode { next: None, val }
     }
@@ -28,7 +26,6 @@ where
     T: Copy,
 {
     #[inline]
-    #[allow(dead_code)]
     pub fn new(vals: &[T]) -> Self {
         if vals.is_empty() {
             List { head: None }
@@ -51,7 +48,6 @@ where
     }
 
     /// 抛出链表的头结点，返回对应的值
-    #[allow(dead_code)]
     pub fn pop(&mut self) -> Option<T> {
         self.head.take().map(|node| {
             self.head = node.next;
@@ -59,7 +55,6 @@ where
         })
     }
 
-    #[allow(dead_code)]
     pub fn as_vec(&mut self) -> Vec<T> {
         let mut vectors = Vec::new();
         while let Some(val) = self.pop() {

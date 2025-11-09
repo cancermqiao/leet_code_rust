@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// LCR 160. 珠宝的最高价值
-    #[allow(dead_code)]
     pub fn jewellery_value(mut frame: Vec<Vec<i32>>) -> i32 {
         for i in 0..frame.len() {
             for j in 0..frame[0].len() {

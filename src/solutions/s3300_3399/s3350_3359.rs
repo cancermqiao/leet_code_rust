@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 3354. 使数组元素等于零
-    #[allow(dead_code)]
     pub fn count_valid_selections(nums: Vec<i32>) -> i32 {
         let (mut left_sum, all_sum): (i32, i32) = (0, nums.iter().sum());
         let mut res = 0;

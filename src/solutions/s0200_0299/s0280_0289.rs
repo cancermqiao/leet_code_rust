@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 283. 移动零
-    #[allow(dead_code)]
     pub fn move_zeroes(nums: &mut Vec<i32>) {
         let mut zero_flag = 0_usize;
         for index in 0..nums.len() {
@@ -19,7 +18,6 @@ impl Solution {
     /// 增加状态：
     /// 1. -1：原来死 -> 现在活
     /// 2. 2：原来活 -> 现在死
-    #[allow(dead_code)]
     pub fn game_of_life(board: &mut Vec<Vec<i32>>) {
         let (nr, nc) = (board.len() as i32, board[0].len() as i32);
         for r in 0..nr {

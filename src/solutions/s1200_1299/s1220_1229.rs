@@ -12,7 +12,6 @@ impl Solution {
         }
     }
 
-    #[allow(dead_code)]
     pub fn queens_attackthe_king(queens: Vec<Vec<i32>>, king: Vec<i32>) -> Vec<Vec<i32>> {
         let mut res: std::collections::HashMap<(i32, i32), (Vec<i32>, i32)> =
             std::collections::HashMap::new();

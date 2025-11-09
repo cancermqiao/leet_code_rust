@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 978. 最长湍流子数组
-    #[allow(dead_code)]
     pub fn max_turbulence_size(arr: Vec<i32>) -> i32 {
         let n = arr.len();
         if n == 0 {
@@ -11,7 +10,7 @@ impl Solution {
         if n == 1 {
             return 1;
         }
-        
+
         let mut max_size = 1;
         let mut cur_size = 1;
         let mut gap = 0;
@@ -42,7 +41,7 @@ mod tests {
     /// 978. 最长湍流子数组
     #[test]
     fn max_turbulence_size() {
-        let arr = vec![9,4,2,10,7,8,8,1,9];
+        let arr = vec![9, 4, 2, 10, 7, 8, 8, 1, 9];
         let res = Solution::max_turbulence_size(arr);
         assert_eq!(res, 5)
     }

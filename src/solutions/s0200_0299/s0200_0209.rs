@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 200. 岛屿的数量
-    #[allow(dead_code)]
     pub fn num_islands(mut grid: Vec<Vec<char>>) -> i32 {
         let (nr, nc) = (grid.len() as i32, grid[0].len() as i32);
         let mut num_islands = 0;
@@ -32,7 +31,6 @@ impl Solution {
     }
 
     /// 202. 快乐数
-    #[allow(dead_code)]
     pub fn is_happy(n: i32) -> bool {
         let get_next = |mut num: i32| {
             let mut res = 0;
@@ -52,7 +50,6 @@ impl Solution {
     }
 
     /// 205. 同构字符串
-    #[allow(dead_code)]
     pub fn is_isomorphic(s: String, t: String) -> bool {
         let mut s2t: std::collections::HashMap<char, char> = std::collections::HashMap::new();
         let mut t2s: std::collections::HashMap<char, char> = std::collections::HashMap::new();
@@ -78,7 +75,6 @@ impl Solution {
     }
 
     /// 209. 长度最小的子数组
-    #[allow(dead_code)]
     pub fn min_sub_array_len(target: i32, nums: Vec<i32>) -> i32 {
         let (mut i, mut sum, mut res) = (0, 0, target + 1);
         for j in 0..nums.len() {

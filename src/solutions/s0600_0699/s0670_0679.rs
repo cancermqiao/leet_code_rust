@@ -2,7 +2,6 @@ pub struct Solution;
 
 impl Solution {
     /// 678. 有效的括号字符串
-    #[allow(dead_code)]
     pub fn check_valid_string(s: String) -> bool {
         let (mut stack1, mut stack2) = (Vec::new(), Vec::new());
         for (i, c) in s.chars().enumerate() {
